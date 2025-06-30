@@ -1,0 +1,123 @@
+{
+    "@@locale": "en",
+    "profileGreeting": "HELLO, I´M CHRISTOPHER PAZ LEÓN, \nA CROSS-PLATFORM...",
+    "@profileGreeting": {
+        "description": "Greeting text introducing Christopher Paz León"
+    },
+    "profileTitleMobile": "MOBILE\nENGINEER",
+    "@profileTitleMobile": {
+        "description": "Mobile part of the profile title"
+    },
+    "profileDescription": "With over 2 years of experience, I drive ideas into high-impact experiences through functional, sustainable, and scalable solutions, always ensuring an authentic Win-Win with our users.",
+    "@profileDescription": {
+        "description": "Professional description and experience summary"
+    },
+    "scrollText": "SCROLL",
+    "@scrollText": {
+        "description": "Scroll indicator text"
+    },
+    "aboutPassion": "I work with a purpose-driven approach: each module has a measurable objective and contributes to a seamless customer experience. I prioritize simplicity, learn and adapt technologies only if they improve the product, and maintain strategic communication to solve real problems with elegance and precision.",
+    "@aboutPassion": {
+        "description": "About page passion statement focusing on purpose-driven development approach"
+    },
+    "aboutTitle": "ABOUT",
+    "@aboutTitle": {
+        "description": "Title for the About section"
+    },
+    "aboutEducation": "Wisdom is born in practice, not on paper; I draw from varied sources and real challenges to master the essentials in day-to-day work. \nMy education is a continuous adaptation engine that prepares me for any technological challenge.",
+    "@aboutEducation": {
+        "description": "About page education philosophy statement"
+    },
+    "aboutEducationDetails": "I study Computer Systems Engineering at UPN and completed specialized courses in Flutter and C#.NET backend. I regularly read technical books like The Pragmatic Programmer and Clean Code, applying their principles in mobile interface design and quality code.\n\nI stay updated with articles on Medium and daily.dev to adapt my technology stack and decisions to the pace of the cutting edge.\n\nThis combination of formal education, practical courses, and continuous reading allows me to act with confidence.",
+    "@aboutEducationDetails": {
+        "description": "Detailed education background and continuous learning approach"
+    },
+    "aboutLabel": "About Me",
+    "@aboutLabel": {
+        "description": "Label for the About Me section"
+    },
+    "contactLabel": "Contact",
+    "@contactLabel": {
+        "description": "Label for the Contact section"
+    },
+    "experienceLabel": "Experience",
+    "@experienceLabel": {
+        "description": "Label for the Experience section"
+    },
+    "educationLabel": "Education",
+    "@educationLabel": {
+        "description": "Label for the Education section"
+    },
+    "skillsLabel": "Skills",
+    "@skillsLabel": {
+        "description": "Label for the Skills section"
+    },
+    "knowMore": "Know more.",
+    "@knowMore": {
+        "description": "Text to know more"
+    },
+    "forLabel": "for",
+    "@forLabel": {
+        "description": "Label for provider of certificate/award"
+    },
+    "fromLabel": "From",
+    "@fromLabel": {
+        "description": "Date range start label"
+    },
+    "toLabel": "to",
+    "@toLabel": {
+        "description": "Date range connector label"
+    },
+    "nowLabel": "Now",
+    "@nowLabel": {
+        "description": "Current time label for ongoing positions"
+    },
+    "januaryLabel": "January",
+    "@januaryLabel": {
+        "description": "January month name"
+    },
+    "februaryLabel": "February",
+    "@februaryLabel": {
+        "description": "February month name"
+    },
+    "marchLabel": "March",
+    "@marchLabel": {
+        "description": "March month name"
+    },
+    "aprilLabel": "April",
+    "@aprilLabel": {
+        "description": "April month name"
+    },
+    "mayLabel": "May",
+    "@mayLabel": {
+        "description": "May month name"
+    },
+    "juneLabel": "June",
+    "@juneLabel": {
+        "description": "June month name"
+    },
+    "julyLabel": "July",
+    "@julyLabel": {
+        "description": "July month name"
+    },
+    "augustLabel": "August",
+    "@augustLabel": {
+        "description": "August month name"
+    },
+    "septemberLabel": "September",
+    "@septemberLabel": {
+        "description": "September month name"
+    },
+    "octoberLabel": "October",
+    "@octoberLabel": {
+        "description": "October month name"
+    },
+    "novemberLabel": "November",
+    "@novemberLabel": {
+        "description": "November month name"
+    },
+    "decemberLabel": "December",
+    "@decemberLabel": {
+        "description": "December month name"
+    }
+}

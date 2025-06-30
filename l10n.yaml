@@ -1,0 +1,5 @@
+template-arb-file: en.arb
+output-localization-file: app_localizations.dart
+synthetic-package: false
+output-dir: lib/config/gen/
+arb-dir: lib/config/l10n
