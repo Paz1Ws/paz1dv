@@ -246,9 +246,7 @@ class HighlightedSignaturePainter extends CustomPainter {
     if (dotHighlight > 0) {
       // Subtle highlight background with smooth opacity
       final dotHighlightPaint = Paint()
-        ..color = primaryColor.withOpacity(
-          (0.2 * dotHighlight).clamp(0.0, 1.0),
-        )
+        ..color = primaryColor.withOpacity((0.2 * dotHighlight).clamp(0.0, 1.0))
         ..style = PaintingStyle.fill
         ..maskFilter = MaskFilter.blur(
           BlurStyle.normal,
@@ -280,9 +278,7 @@ class HighlightedSignaturePainter extends CustomPainter {
 
       // Draw spinning rays
       final rayPaint = Paint()
-        ..color = primaryColor.withOpacity(
-          (0.7 * dotHighlight).clamp(0.0, 1.0),
-        )
+        ..color = primaryColor.withOpacity((0.7 * dotHighlight).clamp(0.0, 1.0))
         ..strokeWidth = 1.0
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round;

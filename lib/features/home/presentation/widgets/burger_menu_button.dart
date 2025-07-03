@@ -165,7 +165,9 @@ class _BurgerBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: isTapped
             ? AppPalette.crimsonRed
-            : (isHovered ? AppPalette.primaryColor(context) : AppPalette.lightMode),
+            : (isHovered
+                  ? AppPalette.primaryColor(context)
+                  : AppPalette.reverseAdaptiveColor(context)),
         borderRadius: BorderRadius.circular(borderRadius),
         boxShadow: [
           BoxShadow(

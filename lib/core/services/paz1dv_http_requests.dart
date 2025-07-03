@@ -35,11 +35,11 @@ class ApiService {
     }
   }
 
-  /// Fetches a list of skills combined with their translations.
-  Future<List<SkillModel>> fetchSkills(String locale) async {
+  /// Fetches a list of skills.
+  Future<List<SkillModel>> fetchSkills() async {
     try {
       final response = await _dio.get(
-        '/skills?select=*,skill_translations(*)&skill_translations.locale=eq.$locale',
+        '/skills', // No translations join needed
       );
       final data = response.data as List;
       return data.map((item) => SkillModel.fromJson(item)).toList();

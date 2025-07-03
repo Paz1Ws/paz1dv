@@ -1,26 +1,17 @@
-class SkillModel {
-  final String imagePath;
-  // Translated fields
-  final String title;
-  final String description;
+import 'package:skeletonizer/skeletonizer.dart';
 
-  SkillModel({
-    required this.imagePath,
-    required this.title,
-    required this.description,
-  });
+class SkillModel {
+  final String name;
+  final String? logoUrl;
+
+  SkillModel({required this.name, this.logoUrl});
 
   factory SkillModel.fromJson(Map<String, dynamic> json) {
-    final translations = json['skill_translations'] as List;
-    if (translations.isEmpty) {
-      throw Exception('No translation found for skill ID: ${json['id']}');
-    }
-    final t = translations.first as Map<String, dynamic>;
-
     return SkillModel(
-      imagePath: json['image_path'] ?? '',
-      title: t['title'] ?? '',
-      description: t['description'] ?? '',
+      name: json['name'] as String,
+      logoUrl: json['logo_url'] as String?,
     );
   }
+
+  factory SkillModel.fake() => SkillModel(name: BoneMock.name, logoUrl: '');
 }

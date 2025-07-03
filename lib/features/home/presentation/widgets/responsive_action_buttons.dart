@@ -7,6 +7,10 @@ import 'package:paz1dv/config/app/app_typography.dart';
 import 'package:paz1dv/config/app/app_icons.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
 import 'package:paz1dv/config/gen/app_localizations.dart';
+import 'package:paz1dv/core/services/audio_player_service.dart';
+import 'package:paz1dv/features/home/presentation/widgets/music_flyers.dart';
+
+final remixButtonTappedProvider = StateProvider<bool>((ref) => false);
 
 class ActionButtons extends ConsumerWidget {
   final Size size;
@@ -51,13 +55,15 @@ class _ActionButtonsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final showFlyers = ref.watch(remixButtonTappedProvider);
+
     if (isNarrow) {
       return Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: kSpacing8,
+        spacing: kSpacing4,
         children: [
           Row(
-            spacing: kSpacing12,
+            spacing: kSpacing4, // Reducido aún más
             mainAxisSize: MainAxisSize.min,
             children: [
               _ThemeButton(size: size, ref: ref),
@@ -75,15 +81,19 @@ class _ActionButtonsLayout extends StatelessWidget {
     } else {
       return Row(
         mainAxisSize: MainAxisSize.min,
-        spacing: kSpacing12,
+        spacing: kSpacing4, // Reducido aún más
         children: [
           _ThemeButton(size: size, ref: ref),
           _RemixButton(size: size),
-          _LanguageToggle(
-            size: size,
-            ref: ref,
-            currentLocale: currentLocale,
-            isNarrow: false,
+          AnimatedPadding(
+            duration: const Duration(milliseconds: 200),
+            padding: EdgeInsets.only(left: showFlyers ? kSpacing12 : 0),
+            child: _LanguageToggle(
+              size: size,
+              ref: ref,
+              currentLocale: currentLocale,
+              isNarrow: false,
+            ),
           ),
         ],
       );
@@ -117,7 +127,9 @@ class _ThemeButton extends StatelessWidget {
           shape: BoxShape.circle,
           color: isDark ? AppPalette.neonLime : AppPalette.vibrantBlue,
           border: Border.all(
-            color: isDark ? AppPalette.electricLime : AppPalette.vibrantBlue.withOpacity(0.7),
+            color: isDark
+                ? AppPalette.electricLime
+                : AppPalette.vibrantBlue.withOpacity(0.7),
             width: kStroke1,
           ),
         ),
@@ -131,28 +143,54 @@ class _ThemeButton extends StatelessWidget {
   }
 }
 
-class _RemixButton extends StatelessWidget {
+class _RemixButton extends ConsumerWidget {
   final Size size;
 
   const _RemixButton({required this.size});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isNarrow = ResponsiveConstants.isNarrowScreen(context);
     final buttonSize = isNarrow ? size.height * 0.05 : size.height * 0.06;
     final iconSize = isNarrow ? size.height * 0.025 : size.height * 0.03;
-    return Container(
-      width: buttonSize,
-      height: buttonSize,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: AppPalette.primaryColor(context),
-        border: Border.all(color: AppPalette.mutedGray, width: kStroke1),
-      ),
-      child: Icon(
-        AppIcons.headphones,
-        size: iconSize,
-        color: AppPalette.darkMode,
+    final showFlyers = ref.watch(remixButtonTappedProvider);
+
+    return SizedBox(
+      width: buttonSize * 2,
+      height: buttonSize * 2,
+      child: Stack(
+        alignment: Alignment.center,
+        clipBehavior: Clip.none,
+        children: [
+          if (showFlyers) MusicFlyers(iconSize: buttonSize),
+          GestureDetector(
+            onTap: () {
+              final currentState = ref.read(remixButtonTappedProvider);
+              if (currentState) {
+                ref.read(audioPlayerProvider).stop();
+              }
+              ref.read(remixButtonTappedProvider.notifier).state =
+                  !currentState;
+            },
+            child: Container(
+              width: buttonSize,
+              height: buttonSize,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppPalette.primaryColor(context),
+                border: Border.all(
+                  color: AppPalette.mutedGray,
+                  width: kStroke1,
+                ),
+              ),
+              child: Icon(
+                AppIcons.headphones,
+                size: iconSize,
+                color: AppPalette.darkMode,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

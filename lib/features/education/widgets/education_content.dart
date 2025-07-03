@@ -58,6 +58,17 @@ class CarouselLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Alternating split: even indices for top, odd for bottom
+    final List<EducationModel> topSkills = [];
+    final List<EducationModel> bottomSkills = [];
+    for (int i = 0; i < skillsData.length; i++) {
+      if (i % 2 == 0) {
+        topSkills.add(skillsData[i]);
+      } else {
+        bottomSkills.add(skillsData[i]);
+      }
+    }
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       spacing: kSpacing20,
@@ -71,8 +82,7 @@ class CarouselLayout extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                final skillIndex = index % skillsData.length;
-                final skill = skillsData[skillIndex];
+                final skill = topSkills[index % topSkills.length];
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: kSpacing8),
                   child: EducationCard(
@@ -96,8 +106,7 @@ class CarouselLayout extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                final skillIndex = index % skillsData.length;
-                final skill = skillsData[skillIndex];
+                final skill = bottomSkills[index % bottomSkills.length];
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: kSpacing8),
                   child: EducationCard(

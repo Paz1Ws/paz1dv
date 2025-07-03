@@ -27,6 +27,10 @@ dependencies:
   intl: '>=0.19.0 <0.21.0'
   supabase_flutter: ^2.9.1
   equatable: ^2.0.7
+  rive: ^0.13.20
+  audioplayers: ^6.5.0
+  audioplayers_windows: ^4.2.1
+  skeletonizer: ^2.1.0
 dev_dependencies: 
   build_runner: ^2.4.6
   flutter_test:

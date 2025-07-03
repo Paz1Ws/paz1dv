@@ -34,16 +34,15 @@ class LiquidGlassSettings {
     double? lightIntensity,
     double? ambientStrength,
     double? refractiveIndex,
-  }) =>
-      LiquidGlassSettings(
-        glassColor: glassColor ?? this.glassColor,
-        thickness: thickness ?? this.thickness,
-        blur: blur ?? this.blur,
-        chromaticAberration: chromaticAberration ?? this.chromaticAberration,
-        blend: blend ?? this.blend,
-        lightAngle: lightAngle ?? this.lightAngle,
-        lightIntensity: lightIntensity ?? this.lightIntensity,
-        ambientStrength: ambientStrength ?? this.ambientStrength,
-        refractiveIndex: refractiveIndex ?? this.refractiveIndex,
-      );
+  }) => LiquidGlassSettings(
+    glassColor: glassColor ?? this.glassColor,
+    thickness: thickness ?? this.thickness,
+    blur: blur ?? this.blur,
+    chromaticAberration: chromaticAberration ?? this.chromaticAberration,
+    blend: blend ?? this.blend,
+    lightAngle: lightAngle ?? this.lightAngle,
+    lightIntensity: lightIntensity ?? this.lightIntensity,
+    ambientStrength: ambientStrength ?? this.ambientStrength,
+    refractiveIndex: refractiveIndex ?? this.refractiveIndex,
+  );
 }

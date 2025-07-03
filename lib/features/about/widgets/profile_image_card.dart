@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paz1dv/config/app/app_palette.dart';
-import 'package:paz1dv/config/app/app_icons.dart';
-import 'package:paz1dv/config/config.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
-import 'package:paz1dv/config/gen/app_localizations.dart';
-import 'package:paz1dv/features/about/widgets/about_text_content.dart';
-import 'package:paz1dv/shared/util/url_launcher_util.dart';
+import 'package:rive/rive.dart';
 
 class ProfileImageCard extends StatelessWidget {
   final Size size;
@@ -19,100 +15,224 @@ class ProfileImageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cardWidth = isNarrow ? size.width / 1.2 : size.width * 0.3;
-    final cardHeight = isNarrow ? size.height * 0.5 : size.height * 0.65;
+    final cardWidth = isNarrow ? size.width * 0.8 : size.width * 0.35;
+    final cardHeight = isNarrow ? size.height * 0.45 : size.height * 0.6;
 
-    return Column(
-      children: [
-        SizedBox(
-          width: cardWidth,
-          height: cardHeight,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                top: 90,
-                left: 25,
-                child: Container(
-                  width: cardWidth,
-                  height: cardHeight - 50,
-                  decoration: BoxDecoration(
-                    color: AppPalette.primaryColor(context),
-                    borderRadius: BorderRadius.circular(kRadius20),
-                  ),
-                ),
-              ),
-
-              // Main charcoal container with image
-              Positioned(
-                top: 0,
-                left: 0,
-                child: Container(
-                  width: cardWidth,
-                  height: cardHeight,
-                  decoration: BoxDecoration(
-                    color: AppPalette.charcoalGray,
-                    borderRadius: BorderRadius.circular(kRadius20),
-                  ),
-                  child: Positioned.fill(
-                    right: 20,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(kRadius20),
-                      child: Image.asset(
-                        'assets/images/eeuu.webp',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
-              // Social media buttons positioned independently
-              Positioned(
-                left: 25,
-                right: -25,
-                bottom: -30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SocialMediaButton(
-                      icon: AppIcons.instagram,
-                      onTap: UrlLauncherUtil.launchInstagram,
-                    ),
-                    SocialMediaButton(
-                      icon: AppIcons.figma,
-                      onTap: UrlLauncherUtil.launchFigma,
-                    ),
-                    SocialMediaButton(
-                      icon: AppIcons.github,
-                      onTap: UrlLauncherUtil.launchGitHub,
-                    ),
-                    SocialMediaButton(
-                      icon: AppIcons.linkedin,
-                      onTap: UrlLauncherUtil.launchLinkedIn,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+    return SizedBox(
+      width: cardWidth,
+      height: cardHeight,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // Cards de fondo
+          BackgroundCard(
+            size: size,
+            isNarrow: isNarrow,
+            cardWidth: cardWidth,
+            cardHeight: cardHeight,
           ),
-        ),
-      ],
+          MiddleCard(
+            size: size,
+            isNarrow: isNarrow,
+            cardWidth: cardWidth,
+            cardHeight: cardHeight,
+          ),
+          MainCard(
+            size: size,
+            isNarrow: isNarrow,
+            cardWidth: cardWidth,
+            cardHeight: cardHeight,
+          ),
+
+          RiveAnimationOverlay(
+            size: size,
+            isNarrow: isNarrow,
+            cardWidth: cardWidth,
+            cardHeight: cardHeight,
+          ),
+
+          // Accent decorativo
+          AccentDecoration(size: size),
+        ],
+      ),
     );
   }
 }
 
-class SocialMediaButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onTap;
+class BackgroundCard extends StatelessWidget {
+  final Size size;
+  final bool isNarrow;
+  final double cardWidth;
+  final double cardHeight;
 
-  const SocialMediaButton({super.key, required this.icon, required this.onTap});
+  const BackgroundCard({
+    super.key,
+    required this.size,
+    required this.isNarrow,
+    required this.cardWidth,
+    required this.cardHeight,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Icon(icon, color: AppPalette.darkMode, size: kIconSize24),
+    return Positioned(
+      top: size.height * 0.06,
+      left: -size.width * 0.02,
+      child: Transform.rotate(
+        angle: -0.2,
+        child: Container(
+          width: cardWidth * 0.9,
+          height: cardHeight * 0.75,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: AppPalette.primaryColor(context),
+                blurRadius: size.width * 0.015,
+                offset: Offset(0, size.height * 0.008),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MiddleCard extends StatelessWidget {
+  final Size size;
+  final bool isNarrow;
+  final double cardWidth;
+  final double cardHeight;
+
+  const MiddleCard({
+    super.key,
+    required this.size,
+    required this.isNarrow,
+    required this.cardWidth,
+    required this.cardHeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: size.height * 0.03,
+      left: -size.width * 0.01,
+      child: Transform.rotate(
+        angle: -0.09,
+        child: Container(
+          width: cardWidth * 0.95,
+          height: cardHeight * 0.8,
+          decoration: BoxDecoration(
+            color: AppPalette.reverseAdaptiveColor(context),
+            borderRadius: BorderRadius.circular(kRadius20),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MainCard extends StatelessWidget {
+  final Size size;
+  final bool isNarrow;
+  final double cardWidth;
+  final double cardHeight;
+
+  const MainCard({
+    super.key,
+    required this.size,
+    required this.isNarrow,
+    required this.cardWidth,
+    required this.cardHeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 0,
+      left: 0,
+      child: Container(
+        width: cardWidth,
+        height: cardHeight,
+        decoration: BoxDecoration(
+          color: AppPalette.darkCharcoal,
+          borderRadius: BorderRadius.circular(kRadius20),
+          boxShadow: [
+            BoxShadow(
+              color: AppPalette.darkCharcoal.withOpacity(0.25),
+              blurRadius: size.width * 0.025,
+              offset: Offset(0, size.height * 0.015),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RiveAnimationOverlay extends StatelessWidget {
+  final Size size;
+  final bool isNarrow;
+  final double cardWidth;
+  final double cardHeight;
+
+  const RiveAnimationOverlay({
+    super.key,
+    required this.size,
+    required this.isNarrow,
+    required this.cardWidth,
+    required this.cardHeight,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: -size.height * 0.02,
+      left: -size.width * 0.01,
+      child: SizedBox(
+        width: cardWidth * 1.1, // Más grande que la card principal
+        height: cardHeight * 1.1,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(kRadius20),
+          child: RiveAnimation.asset(
+            'assets/images/hard_at_work.riv',
+            animations: const ['StatueMove'],
+            fit: BoxFit.contain, // Mantiene aspect ratio
+            onInit: (artboard) {
+              print('Rive animation initialized');
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AccentDecoration extends StatelessWidget {
+  final Size size;
+
+  const AccentDecoration({super.key, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: -size.height * 0.01,
+      right: -size.width * 0.01,
+      child: Container(
+        width: size.width * 0.06,
+        height: size.width * 0.06,
+        decoration: BoxDecoration(
+          color: AppPalette.goldenYellow,
+          borderRadius: BorderRadius.circular(kRadius100),
+          boxShadow: [
+            BoxShadow(
+              color: AppPalette.goldenYellow.withAlpha(102),
+              blurRadius: size.width * 0.015,
+              offset: Offset(0, size.height * 0.005),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

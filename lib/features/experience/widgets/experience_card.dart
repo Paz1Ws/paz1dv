@@ -122,6 +122,7 @@ class _ExperienceCardState extends State<ExperienceCard>
                     scale: _scaleAnimation.value,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: kSpacing8,
                       children: [
                         Image.network(
                           widget.item.icon,
@@ -135,16 +136,12 @@ class _ExperienceCardState extends State<ExperienceCard>
                             );
                           },
                         ),
-                        const SizedBox(height: kSpacing8),
                         Text(
                           widget.item.title,
-                          style: AppTypography.subtitleMedium(context),
+                          style: AppTypography.subtitleMedium(
+                            context,
+                          ).copyWith(color: AppPalette.lightMode),
                         ),
-                        // You could optionally display a small date indicator here
-                        // Text(
-                        //   widget.item.formattedDateRange,
-                        //   style: AppTypography.caption(context),
-                        // ),
                       ],
                     ),
                   );
@@ -197,7 +194,9 @@ class _ExperienceCardState extends State<ExperienceCard>
               duration: const Duration(milliseconds: 300),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: isHovered ? AppPalette.primaryColor(context) : Colors.transparent,
+                  color: isHovered
+                      ? AppPalette.primaryColor(context)
+                      : Colors.transparent,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(kRadius12),

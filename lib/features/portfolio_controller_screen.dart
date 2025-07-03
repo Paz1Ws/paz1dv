@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paz1dv/config/app/app_palette.dart';
-import 'package:paz1dv/config/constants/layer_constants.dart';
 import 'package:paz1dv/config/constants/responsive_constants.dart';
 import 'package:paz1dv/config/gen/app_localizations.dart';
 import 'package:paz1dv/features/about/screens/about_screen.dart';
@@ -12,6 +11,7 @@ import 'package:paz1dv/features/home/presentation/screens/profile_screen.dart';
 import 'package:paz1dv/features/portfolio_controller_providers.dart';
 import 'package:paz1dv/features/skills/screens/skills_screen.dart';
 import 'package:paz1dv/shared/widgets/section_divider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class PortfolioHomeScreen extends ConsumerStatefulWidget {
   const PortfolioHomeScreen({super.key});
@@ -22,6 +22,8 @@ class PortfolioHomeScreen extends ConsumerStatefulWidget {
 }
 
 class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
+  final ScrollController _scrollController = ScrollController();
+
   final Map<PortfolioSection, GlobalKey> _sectionKeys = {
     PortfolioSection.about: GlobalKey(),
     PortfolioSection.education: GlobalKey(),
@@ -30,9 +32,26 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
     PortfolioSection.contact: GlobalKey(),
   };
 
+  @override
+  void initState() {
+    super.initState();
+    // Asegurar que siempre comience desde la parte superior
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(0.0);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   void _scrollToSection(PortfolioSection section) {
     final context = _sectionKeys[section]?.currentContext;
-    if (context != null) {
+    if (context != null && _scrollController.hasClients) {
       Scrollable.ensureVisible(
         context,
         duration: const Duration(seconds: 1),
@@ -59,6 +78,9 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
     return Scaffold(
       backgroundColor: AppPalette.adaptiveColor(context),
       body: SingleChildScrollView(
+        controller: _scrollController,
+        physics:
+            const ClampingScrollPhysics(), // Previene comportamientos extraños de scroll
         child: Column(
           children: [
             const ProfileScreen(),

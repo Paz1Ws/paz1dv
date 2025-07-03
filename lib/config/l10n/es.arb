@@ -119,5 +119,9 @@
     "decemberLabel": "Diciembre",
     "@decemberLabel": {
         "description": "Nombre del mes diciembre"
+    },
+    "connectWithMe": "Conecta conmigo",
+    "@connectWithMe": {
+        "description": "Título de la sección de redes sociales"
     }
 }

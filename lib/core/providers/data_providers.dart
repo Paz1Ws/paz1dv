@@ -23,17 +23,9 @@ final experiencesProvider =
       final apiService = ref.watch(apiServiceProvider);
       return apiService.fetchExperiences(locale);
     });
-
-/// Provider to fetch the list of skills. It depends on a locale.
-final skillsProvider = FutureProvider.family<List<SkillModel>, String>((
-  ref,
-  locale,
-) {
-  final apiService = ref.watch(apiServiceProvider);
-  return apiService.fetchSkills(locale);
+final skillsProvider = FutureProvider<List<SkillModel>>((ref) async {
+  return ApiService().fetchSkills();
 });
-
-/// Provider to fetch the list of education items. It depends on a locale.
 final educationProvider = FutureProvider.family<List<EducationModel>, String>((
   ref,
   locale,

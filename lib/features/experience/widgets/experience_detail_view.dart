@@ -22,20 +22,23 @@ class ExperienceDetailView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isNarrow = ResponsiveConstants.isNarrowScreen(context);
-    // Watch for locale changes to rebuild when language changes
     ref.watch(languageProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: kSpacing30,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              item.title,
-              style: AppTypography.heading3(
-                context,
-                color: AppPalette.reverseAdaptiveColor(context),
+            Flexible(
+              child: Text(
+                item.title,
+                style: AppTypography.heading3(
+                  context,
+                  color: AppPalette.reverseAdaptiveColor(context),
+                ),
+                maxLines: 3,
               ),
             ),
             IconButton(
@@ -47,7 +50,6 @@ class ExperienceDetailView extends ConsumerWidget {
             ),
           ],
         ),
-        const SizedBox(height: kSpacing30),
         Flex(
           direction: isNarrow ? Axis.vertical : Axis.horizontal,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +107,6 @@ class ExperienceDetailView extends ConsumerWidget {
             ),
           ],
         ),
-        const SizedBox(height: kSpacing30),
         // Replace the single image container with a carousel
         if (item.carouselImages.isNotEmpty) ...[
           SizedBox(

@@ -277,6 +277,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'December'**
   String get decemberLabel;
+
+  /// Social media section title
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with me'**
+  String get connectWithMe;
 }
 
 class _AppLocalizationsDelegate
