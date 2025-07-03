@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:paz1dv/config/constants/responsive_constants.dart';
 import 'package:paz1dv/config/app/app_palette.dart';
-import 'package:paz1dv/config/app/app_typography.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
 import 'package:paz1dv/config/gen/app_localizations.dart';
-import 'package:paz1dv/features/home/presentation/widgets/burger_menu_button.dart';
-import 'package:paz1dv/features/home/presentation/widgets/animated_signature.dart';
 
 class RemixButton extends StatelessWidget {
   final Size size;

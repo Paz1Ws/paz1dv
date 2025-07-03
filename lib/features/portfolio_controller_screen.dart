@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paz1dv/config/app/app_palette.dart';
@@ -11,7 +12,6 @@ import 'package:paz1dv/features/home/presentation/screens/profile_screen.dart';
 import 'package:paz1dv/features/portfolio_controller_providers.dart';
 import 'package:paz1dv/features/skills/screens/skills_screen.dart';
 import 'package:paz1dv/shared/widgets/section_divider.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class PortfolioHomeScreen extends ConsumerStatefulWidget {
   const PortfolioHomeScreen({super.key});
@@ -79,11 +79,14 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
       backgroundColor: AppPalette.adaptiveColor(context),
       body: SingleChildScrollView(
         controller: _scrollController,
-        physics:
-            const ClampingScrollPhysics(), // Previene comportamientos extraños de scroll
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
-            const ProfileScreen(),
+            FadeInUpBig(
+              child: const ProfileScreen(),
+              duration: Duration(milliseconds: 1800),
+                curve : Curves.easeInOutCubicEmphasized
+            ),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: isNarrow ? size.width * 0.05 : size.width * 0.08,

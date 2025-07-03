@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:paz1dv/config/app/app_config_providers.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
 import 'package:paz1dv/config/app/app_palette.dart';
 import 'package:paz1dv/config/constants/responsive_constants.dart';
@@ -55,9 +54,7 @@ class BurgerMenuButton extends ConsumerWidget {
           }
         },
         onExit: (_) {
-          if (!isTapped) {
-            ref.read(toggleBurgerMenuProvider.notifier).state = false;
-          }
+           ref.read(toggleBurgerMenuProvider.notifier).state = false;
         },
         child: SizedBox(
           width: containerWidth,

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paz1dv/config/app/app_config_providers.dart';
 import 'package:paz1dv/config/constants/responsive_constants.dart';
 import 'package:paz1dv/config/app/app_palette.dart';
-import 'package:paz1dv/config/app/app_typography.dart';
 import 'package:paz1dv/config/app/app_icons.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
 import 'package:paz1dv/config/gen/app_localizations.dart';
@@ -101,42 +100,70 @@ class _ActionButtonsLayout extends StatelessWidget {
   }
 }
 
-class _ThemeButton extends StatelessWidget {
+class _ThemeButton extends StatefulWidget {
   final Size size;
   final WidgetRef ref;
-
-  const _ThemeButton({required this.size, required this.ref});
+  bool? isHover = true;
+  _ThemeButton({required this.size, required this.ref, this.isHover});
 
   @override
+  State<_ThemeButton> createState() => _ThemeButtonState();
+}
+
+class _ThemeButtonState extends State<_ThemeButton> {
+  @override
   Widget build(BuildContext context) {
-    final themeMode = ref.watch(themeModeProvider);
+    final themeMode = widget.ref.watch(themeModeProvider);
     final isDark = themeMode == ThemeMode.dark;
     final isNarrow = ResponsiveConstants.isNarrowScreen(context);
-    final buttonSize = isNarrow ? size.height * 0.05 : size.height * 0.06;
-    final iconSize = isNarrow ? size.height * 0.025 : size.height * 0.03;
-    return GestureDetector(
-      onTap: () {
-        ref.read(themeModeProvider.notifier).state = isDark
-            ? ThemeMode.light
-            : ThemeMode.dark;
+    final buttonSize = isNarrow
+        ? widget.size.height * 0.05
+        : widget.size.height * 0.06;
+    final iconSize = isNarrow
+        ? widget.size.height * 0.025
+        : widget.size.height * 0.03;
+    return MouseRegion(
+      onHover: (_) {
+        setState(() {
+          widget.isHover = true;
+        });
       },
-      child: Container(
-        width: buttonSize,
-        height: buttonSize,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: isDark ? AppPalette.neonLime : AppPalette.vibrantBlue,
-          border: Border.all(
-            color: isDark
-                ? AppPalette.electricLime
-                : AppPalette.vibrantBlue.withOpacity(0.7),
-            width: kStroke1,
+      onExit: (_) {
+        setState(() {
+          widget.isHover = false;
+        });
+      },
+      child: GestureDetector(
+        onTap: () {
+          widget.ref.read(themeModeProvider.notifier).state = isDark
+              ? ThemeMode.light
+              : ThemeMode.dark;
+        },
+        child: Container(
+          width: buttonSize,
+          height: buttonSize,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: isDark ? AppPalette.neonLime : AppPalette.vibrantBlue,
+           
+            boxShadow: widget.isHover == true
+                ? [
+                    BoxShadow(
+                      color: isDark
+                          ? AppPalette.electricLime.withAlpha(120)
+                          : AppPalette.vibrantBlue.withAlpha(20),
+                      blurRadius: 28,
+                      spreadRadius: widget.size.width * 0.005,
+                      blurStyle: BlurStyle.normal
+                    ),
+                  ]
+                : null,
           ),
-        ),
-        child: Icon(
-          isDark ? AppIcons.sun : AppIcons.moon,
-          size: iconSize,
-          color: AppPalette.adaptiveColor(context),
+          child: Icon(
+            isDark ? AppIcons.sun : AppIcons.moon,
+            size: iconSize,
+            color: AppPalette.adaptiveColor(context),
+          ),
         ),
       ),
     );

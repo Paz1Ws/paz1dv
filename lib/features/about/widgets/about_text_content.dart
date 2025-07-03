@@ -91,7 +91,7 @@ class AboutDetailsText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       aboutDetails,
-      style: AppTypography.bodyLarge(context, color: AppPalette.mutedGray),
+      style: AppTypography.bodyLarge(context, color: AppPalette.charcoalGray),
     );
   }
 }
@@ -103,34 +103,23 @@ class SocialMediaSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+final localizations = AppLocalizations.of(context)!;
     return Column(
+      spacing: size.height * 0.02,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SocialMediaTitle(size: size),
-        SizedBox(height: size.height * 0.02),
+        Text(
+      localizations.connectWithMe,
+      style: AppTypography.subtitleLarge(
+        context,
+        color: AppPalette.primaryColor(context),
+      ),),
         SocialMediaButtons(size: size),
       ],
     );
   }
 }
 
-class SocialMediaTitle extends StatelessWidget {
-  final Size size;
-
-  const SocialMediaTitle({super.key, required this.size});
-
-  @override
-  Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-    return Text(
-      localizations.connectWithMe,
-      style: AppTypography.subtitleLarge(
-        context,
-        color: AppPalette.primaryColor(context),
-      ),
-    );
-  }
-}
 
 class SocialMediaButtons extends StatelessWidget {
   final Size size;
@@ -288,7 +277,7 @@ class _SocialMediaButtonState extends State<SocialMediaButton>
                         SizedBox(width: size.width * 0.008),
                         Text(
                           widget.label,
-                          style: AppTypography.buttonMedium(
+                          style: AppTypography.buttonLarge(
                             context,
                             color: _isHovered
                                 ? widget.color

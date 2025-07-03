@@ -1,14 +1,9 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:paz1dv/config/app/app_palette.dart';
-import 'package:paz1dv/config/app/app_typography.dart';
 import 'package:paz1dv/config/config.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
 import 'package:paz1dv/config/constants/responsive_constants.dart';
 import 'package:paz1dv/features/education/education_providers.dart';
-import 'package:paz1dv/features/education/domain/models/education_model.dart';
-import 'package:paz1dv/features/education/widgets/education_card.dart';
 import 'package:paz1dv/features/education/widgets/education_content.dart';
 import 'package:paz1dv/core/providers/data_providers.dart';
 

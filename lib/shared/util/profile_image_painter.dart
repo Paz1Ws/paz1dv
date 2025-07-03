@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:paz1dv/config/app/app_palette.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
 
 class ProfileImagePainter extends CustomPainter {

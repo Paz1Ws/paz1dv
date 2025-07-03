@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paz1dv/config/app/app_palette.dart';
-import 'package:paz1dv/config/constants/layer_constants.dart';
 import 'package:paz1dv/core/providers/data_providers.dart';
 import 'package:paz1dv/core/services/audio_player_service.dart';
 

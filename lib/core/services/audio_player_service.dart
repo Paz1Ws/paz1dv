@@ -21,9 +21,9 @@ class AudioPlayerService {
   List<String> getSongsForBand(List<String> allSongs, String band) {
     final String searchTerm;
 
-    if (band == 'The Beatles')
+    if (band == 'The Beatles') {
       searchTerm = 'beatles';
-    else if (band == 'Frank Sinatra')
+    } else if (band == 'Frank Sinatra')
       searchTerm = 'sinatra';
     else if (band == 'La La Land')
       searchTerm = 'lalaland';
