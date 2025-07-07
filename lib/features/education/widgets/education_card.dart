@@ -104,11 +104,11 @@ class _EducationCardState extends State<EducationCard>
                   children: [
                     Text(
                       widget.title,
-                      style: AppTypography.buttonMedium(
+                      style: AppTypography.labelLarge(
                         context,
                         color: AppPalette.darkMode,
-                      ),
-                      maxLines: 1,
+                      ).copyWith(fontWeight: FontWeight.bold),
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     if (!isNarrow)

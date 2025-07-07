@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
@@ -9,10 +10,13 @@ import 'package:paz1dv/features/experience/widgets/experience_card.dart';
 class ExperienceGrid extends StatelessWidget {
   final List<ExperienceModel> experienceItems;
   final Size size;
+  final bool animate;
+
   const ExperienceGrid({
     super.key,
     required this.experienceItems,
     required this.size,
+    this.animate = false,
   });
 
   @override
@@ -36,13 +40,25 @@ class ExperienceGrid extends StatelessWidget {
               itemCount: experienceItems.length,
               itemBuilder: (context, index) {
                 final item = experienceItems[index];
-                return ExperienceCard(
-                  size: size,
-                  item: item,
-                  onTap: () =>
-                      ref.read(selectedExperienceProvider.notifier).state =
-                          item,
-                );
+                return animate
+                    ? FadeInUp(
+                        duration: const Duration(milliseconds: 800),
+                        delay: Duration(milliseconds: 200 * index),
+                        child: ExperienceCard(
+                          size: size,
+                          item: item,
+                          onTap: () =>
+                              ref.read(selectedExperienceProvider.notifier).state =
+                                  item,
+                        ),
+                      )
+                    : ExperienceCard(
+                        size: size,
+                        item: item,
+                        onTap: () =>
+                            ref.read(selectedExperienceProvider.notifier).state =
+                                item,
+                      );
               },
             ),
           ],

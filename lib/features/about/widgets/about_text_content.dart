@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:paz1dv/config/app/app_palette.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
@@ -12,6 +13,7 @@ class AboutTextContent extends StatelessWidget {
   final bool isNarrow;
   final String aboutPassion;
   final String aboutDetails;
+  final bool animate;
 
   const AboutTextContent({
     super.key,
@@ -19,6 +21,7 @@ class AboutTextContent extends StatelessWidget {
     required this.isNarrow,
     required this.aboutPassion,
     required this.aboutDetails,
+    this.animate = false,
   });
 
   @override
@@ -30,17 +33,51 @@ class AboutTextContent extends StatelessWidget {
         spacing: size.height * 0.024,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (isNarrow) ...[SocialMediaSection(size: size)],
-          AboutPassionText(
-            size: size,
-            isNarrow: isNarrow,
-            aboutPassion: aboutPassion,
-          ),
+          if (isNarrow) ...[
+            animate
+              ? FadeInLeft(
+                  duration: const Duration(milliseconds: 800),
+                  delay: const Duration(milliseconds: 400),
+                  child: SocialMediaSection(size: size),
+                )
+              : SocialMediaSection(size: size),
+          ],
+          
+          // About Passion text with animation
+          animate
+            ? FadeIn(
+                duration: const Duration(milliseconds: 800),
+                delay: const Duration(milliseconds: 300),
+                child: AboutPassionText(
+                  size: size,
+                  isNarrow: isNarrow,
+                  aboutPassion: aboutPassion,
+                ),
+              )
+            : AboutPassionText(
+                size: size,
+                isNarrow: isNarrow,
+                aboutPassion: aboutPassion,
+              ),
 
-          AboutDetailsText(size: size, aboutDetails: aboutDetails),
+          // About Details text with animation
+          animate
+            ? FadeIn(
+                duration: const Duration(milliseconds: 800),
+                delay: const Duration(milliseconds: 600),
+                child: AboutDetailsText(size: size, aboutDetails: aboutDetails),
+              )
+            : AboutDetailsText(size: size, aboutDetails: aboutDetails),
+          
           if (!isNarrow) ...[
             SizedBox(height: size.height * 0.01),
-            SocialMediaSection(size: size),
+            animate
+              ? FadeInUp(
+                  duration: const Duration(milliseconds: 800),
+                  delay: const Duration(milliseconds: 800),
+                  child: SocialMediaSection(size: size),
+                )
+              : SocialMediaSection(size: size),
           ],
         ],
       ),
@@ -103,23 +140,23 @@ class SocialMediaSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-final localizations = AppLocalizations.of(context)!;
+    final localizations = AppLocalizations.of(context)!;
     return Column(
       spacing: size.height * 0.02,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-      localizations.connectWithMe,
-      style: AppTypography.subtitleLarge(
-        context,
-        color: AppPalette.primaryColor(context),
-      ),),
+          localizations.connectWithMe,
+          style: AppTypography.subtitleLarge(
+            context,
+            color: AppPalette.primaryColor(context),
+          ),
+        ),
         SocialMediaButtons(size: size),
       ],
     );
   }
 }
-
 
 class SocialMediaButtons extends StatelessWidget {
   final Size size;

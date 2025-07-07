@@ -20,7 +20,6 @@ class AppTypography {
   static const double _fontSize40 = 40;
   static const double _fontSize48 = 48;
   static const double _fontSize64 = 64;
-  static const double _fontSize80 = 80;
 
   // Line heights
   static const double _lineHeight16 = 16;
@@ -33,7 +32,6 @@ class AppTypography {
   static const double _lineHeight48 = 48;
   static const double _lineHeight56 = 56;
   static const double _lineHeight72 = 72;
-  static const double _lineHeight88 = 88;
 
   // Letter spacing
   static const double _letterSpacingTight = -0.5;

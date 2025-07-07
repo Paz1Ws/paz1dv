@@ -123,5 +123,199 @@
     "connectWithMe": "Connect with me",
     "@connectWithMe": {
         "description": "Social media section title"
+    },
+    "listening": "Listening",
+    "@listening": {
+        "description": "Label for listening section or activity"
+    },
+    "kanjiKnowledge": "Knowledge",
+    "@kanjiKnowledge": {
+        "description": "Meaning of the kanji 知 (chi)"
+    },
+    "kanjiBeauty": "Beauty",
+    "@kanjiBeauty": {
+        "description": "Meaning of the kanji 美 (bi)"
+    },
+    "kanjiPatience": "Patience",
+    "@kanjiPatience": {
+        "description": "Meaning of the kanji 忍 (nin)"
+    },
+    "kanjiSincerity": "Sincerity",
+    "@kanjiSincerity": {
+        "description": "Meaning of the kanji 誠 (sei)"
+    },
+    "kanjiWill": "Will",
+    "@kanjiWill": {
+        "description": "Meaning of the kanji 志 (shi)"
+    },
+    "kanjiEternity": "Eternity",
+    "@kanjiEternity": {
+        "description": "Meaning of the kanji 永 (ei)"
+    },
+    "kanjiRomaji": "{kanji} ({romaji}) - {meaning}",
+    "@kanjiRomaji": {
+        "description": "Complete kanji format with romaji and meaning",
+        "placeholders": {
+            "kanji": {
+                "type": "String",
+                "description": "The kanji"
+            },
+            "romaji": {
+                "type": "String",
+                "description": "The romaji reading"
+            },
+            "meaning": {
+                "type": "String",
+                "description": "The meaning of the kanji"
+            }
+        }
+    },
+    "chooseBenefit": "Choose your benefit",
+    "@chooseBenefit": {
+        "description": "Label for benefit selection section"
+    },
+    "discoverKanjiMessage": "Discover my favorite kanji and get one of the surprise benefits!",
+    "@discoverKanjiMessage": {
+        "description": "Placeholder message to discover kanji benefits"
+    },
+    "benefitTechnicalEvaluation": "Technical evaluation of your current product",
+    "@benefitTechnicalEvaluation": {
+        "description": "Title for technical evaluation benefit"
+    },
+    "benefitTechnicalEvaluationDesc": "Thoroughly review the architecture, performance and scalability of your app or system.\nReceive a clear report with:",
+    "@benefitTechnicalEvaluationDesc": {
+        "description": "Description for technical evaluation benefit"
+    },
+    "benefitTechnicalEvaluationPoint1": "Priority findings that are impacting your end user",
+    "@benefitTechnicalEvaluationPoint1": {
+        "description": "First benefit point for technical evaluation"
+    },
+    "benefitTechnicalEvaluationPoint2": "Practical recommendations to optimize loading times and resource consumption",
+    "@benefitTechnicalEvaluationPoint2": {
+        "description": "Second benefit point for technical evaluation"
+    },
+    "benefitTechnicalEvaluationPoint3": "Concrete actions to improve stability and facilitate future integrations",
+    "@benefitTechnicalEvaluationPoint3": {
+        "description": "Third benefit point for technical evaluation"
+    },
+    "benefitExpressConsultation": "Express consultation + 10% OFF on your first month",
+    "@benefitExpressConsultation": {
+        "description": "Title for express consultation benefit"
+    },
+    "benefitExpressConsultationDesc": "30-min strategic session focused on solving critical challenges or validating key decisions.\nYou'll get:",
+    "@benefitExpressConsultationDesc": {
+        "description": "Description for express consultation benefit"
+    },
+    "benefitExpressConsultationPoint1": "Immediate solutions to unblock technical bottlenecks",
+    "@benefitExpressConsultationPoint1": {
+        "description": "First benefit point for express consultation"
+    },
+    "benefitExpressConsultationPoint2": "Validation of your roadmap or a specific idea",
+    "@benefitExpressConsultationPoint2": {
+        "description": "Second benefit point for express consultation"
+    },
+    "benefitExpressConsultationPoint3": "A clear action plan for your next sprint",
+    "@benefitExpressConsultationPoint3": {
+        "description": "Third benefit point for express consultation"
+    },
+    "benefitExpressConsultationPoint4": "Bonus: If you decide to work with me, you get a 10% discount on your first month of collaboration.",
+    "@benefitExpressConsultationPoint4": {
+        "description": "Fourth benefit point for express consultation"
+    },
+    "benefitQuickEvaluation": "Quick evaluation of your idea or project (30 min)",
+    "@benefitQuickEvaluation": {
+        "description": "Title for quick evaluation benefit"
+    },
+    "benefitQuickEvaluationDesc": "Tell me your vision by filling out a brief form, and in half an hour you'll receive:",
+    "@benefitQuickEvaluationDesc": {
+        "description": "Description for quick evaluation benefit"
+    },
+    "benefitQuickEvaluationPoint1": "Identification of technical risks that could slow your progress",
+    "@benefitQuickEvaluationPoint1": {
+        "description": "First benefit point for quick evaluation"
+    },
+    "benefitQuickEvaluationPoint2": "Recommended stack and alternatives according to your team and objectives",
+    "@benefitQuickEvaluationPoint2": {
+        "description": "Second benefit point for quick evaluation"
+    },
+    "benefitQuickEvaluationPoint3": "Clear first steps and tentative milestone calendar",
+    "@benefitQuickEvaluationPoint3": {
+        "description": "Third benefit point for quick evaluation"
+    },
+    "benefitQuickEvaluationPoint4": "High-impact feedback in just 30 min, without wasting time on unnecessary explanations.",
+    "@benefitQuickEvaluationPoint4": {
+        "description": "Fourth benefit point for quick evaluation"
+    },
+    "message": "Message",
+    "@message": {
+        "description": "Generic label for message"
+    },
+    "messagePlaceholder": "Here goes your message for me",
+    "@messagePlaceholder": {
+        "description": "Placeholder text for the message input field"
+    },
+    "contactEmailLabel": "Email",
+    "@contactEmailLabel": {
+        "description": "Label for the email input field in the contact form"
+    },
+    "contactEmailHint": "your@email.com",
+    "@contactEmailHint": {
+        "description": "Hint text for the email input field in the contact form"
+    },
+    "sendLabel": "Send",
+    "@sendLabel": {
+        "description": "Label for the send button in the contact form"
+    },
+    "contactSubjectLabel": "Subject",
+    "@contactSubjectLabel": {
+        "description": "Label for the subject input field in the contact form"
+    },
+    "contactSubjectHint": "What is your message about?",
+    "@contactSubjectHint": {
+        "description": "Hint text for the subject input field in the contact form"
+    },
+    "kanjiFavorite": "My Favorite Kanji",
+    "@kanjiFavorite": {
+        "description": "Label for the favorite kanji section"
+    },
+    "errorSendingMessage": "There was an error sending your message. Please try again.",
+    "@errorSendingMessage": {
+        "description": "Error message shown when sending a message fails"
+    },
+    "messageSentSuccess": "Your message was sent successfully!",
+    "@messageSentSuccess": {
+        "description": "Success message shown when a message is sent successfully"
+    },
+    "selectedBenefit": "Selected benefit",
+    "@selectedBenefit": {
+        "description": "Label for the selected benefit"
+    },
+    "errorInvalidEmail": "Please enter a valid email address.",
+    "@errorInvalidEmail": {
+        "description": "Error message for invalid email address"
+    },
+    "errorMessageTooLong": "The message must be less than 1000 characters.",
+    "@errorMessageTooLong": {
+        "description": "Error message when the message exceeds 1000 characters"
+    },
+    "errorMessageTooShort": "The message must be at least 5 characters.",
+    "@errorMessageTooShort": {
+        "description": "Error message when the message is less than 10 characters"
+    },
+    "errorMessageRequired": "The message is required.",
+    "@errorMessageRequired": {
+        "description": "Error message when the message is required"
+    },
+    "errorSubjectTooShort": "The subject must be at least 10 characters.",
+    "@errorSubjectTooShort": {
+        "description": "Error message when the subject is less than 10 characters"
+    },
+    "errorEmailRequired": "Email is required.",
+    "@errorEmailRequired": {
+        "description": "Error message when the email is required"
+    },
+    "mayIHelpYou": "May I help you?",
+    "@mayIHelpYou": {
+        "description": "Prompt asking if the user needs help"
     }
 }

@@ -136,11 +136,17 @@ class _ExperienceCardState extends State<ExperienceCard>
                             );
                           },
                         ),
-                        Text(
-                          widget.item.title,
-                          style: AppTypography.subtitleMedium(
-                            context,
-                          ).copyWith(color: AppPalette.lightMode),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: kPadding18,
+                          ),
+                          child: Text(
+                            widget.item.title,
+                            style: AppTypography.subtitleLarge(
+                              context,
+                            ).copyWith(color: AppPalette.lightMode),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ],
                     ),
@@ -161,10 +167,9 @@ class _ExperienceCardState extends State<ExperienceCard>
                       horizontal: kSpacing12,
                       vertical: kSpacing8,
                     ),
-
                     decoration: BoxDecoration(
                       color: AppPalette.primaryColor(context),
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(kRadius12),
                       ),
                     ),
@@ -196,7 +201,7 @@ class _ExperienceCardState extends State<ExperienceCard>
                 border: Border.all(
                   color: isHovered
                       ? AppPalette.primaryColor(context)
-                      : Colors.transparent,
+                      : AppPalette.adaptiveColor(context),
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(kRadius12),

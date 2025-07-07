@@ -1,26 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paz1dv/config/app/app_palette.dart';
+import 'package:paz1dv/config/app/app_typography.dart';
+import 'package:paz1dv/config/app/app_icons.dart';
+import 'package:paz1dv/config/config.dart';
+import 'package:paz1dv/config/constants/layer_constants.dart';
+import 'package:paz1dv/config/constants/responsive_constants.dart';
 import 'package:paz1dv/core/providers/data_providers.dart';
 import 'package:paz1dv/core/services/audio_player_service.dart';
+import 'package:paz1dv/features/home/presentation/widgets/action_buttons.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:paz1dv/features/home/presentation/widgets/music_flyer_item.dart';
 
-class MusicFlyers extends ConsumerStatefulWidget {
+final showMusicFlyersProvider = StateProvider<bool>((ref) => false);
+final hoveredFlyerProvider = StateProvider<int?>((ref) => null);
+
+class MusicFlyers extends ConsumerWidget {
   final double iconSize;
+  final bool isNarrow;
 
-  const MusicFlyers({super.key, required this.iconSize});
-
-  @override
-  ConsumerState<MusicFlyers> createState() => _MusicFlyersState();
-}
-
-class _MusicFlyersState extends ConsumerState<MusicFlyers> {
-  String? _currentlyPlayingBand;
+  const MusicFlyers({super.key, required this.iconSize, this.isNarrow = false});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final locale = Localizations.localeOf(context).languageCode;
     final profileAsync = ref.watch(profileProvider(locale));
-    final audioPlayerService = ref.read(audioPlayerProvider);
+    final showFlyers = ref.watch(remixButtonTappedProvider);
+
+    if (!showFlyers && !isNarrow) {
+      return const SizedBox.shrink();
+    }
 
     return profileAsync.when(
       loading: () => const SizedBox.shrink(),
@@ -31,111 +40,73 @@ class _MusicFlyersState extends ConsumerState<MusicFlyers> {
           return const SizedBox.shrink();
         }
 
-        return Stack(
-          clipBehavior: Clip.none,
-          children: [
-            // Flyer 1 - Arriba derecha
-            Positioned(
-              left: widget.iconSize * 0.5,
-              top: -widget.iconSize * 0.1,
-              child: _buildFlyer(0, profile, audioPlayerService),
-            ),
-            // Flyer 2 - Derecha
-            Positioned(
-              left: widget.iconSize * 1.3,
-              top: -widget.iconSize * 0.3,
-              child: _buildFlyer(1, profile, audioPlayerService),
-            ),
-            // Flyer 3 - Abajo derecha
-            Positioned(
-              left: widget.iconSize * 0.9,
-              top: widget.iconSize * 0.5,
-              child: _buildFlyer(2, profile, audioPlayerService),
-            ),
-            // Indicador de reproducción
-            if (_currentlyPlayingBand != null)
+        final bandNames = ['The Beatles', 'Frank Sinatra', 'La La Land'];
+
+        if (isNarrow) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(3, (index) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: MusicFlyerItem(
+                  index: index,
+                  iconSize: iconSize,
+                  band: bandNames[index],
+                  logoUrl: profile.favoriteMusicLogos[index],
+                  songs: profile.favoriteMusic,
+                ),
+              );
+            }),
+          );
+        }
+
+        return SizedBox(
+          width: iconSize * 2.5,
+          height: iconSize * 2.5,
+          child: Stack(
+            children: [
               Positioned(
-                top: widget.iconSize * 2,
-                left: -widget.iconSize,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppPalette.primaryColor(context),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.skip_next,
-                        size: 16,
-                        color: AppPalette.darkMode,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        'Escuchando $_currentlyPlayingBand',
-                        style: TextStyle(
-                          color: AppPalette.darkMode,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
+                left: iconSize * 0.6,
+                top: iconSize * 0.4,
+
+                child: MusicFlyerItem(
+                  index: 1,
+                  iconSize: iconSize,
+                  band: bandNames[1],
+                  logoUrl: profile.favoriteMusicLogos[1],
+                  songs: profile.favoriteMusic,
                 ),
               ),
-          ],
+              // Flyer 1 - Arriba, parcialmente oculto
+              Positioned(
+                left: iconSize * 0.8,
+                top: iconSize * 1.2,
+                child: MusicFlyerItem(
+                  index: 0,
+                  iconSize: iconSize,
+                  band: bandNames[0],
+                  logoUrl: profile.favoriteMusicLogos[0],
+                  songs: profile.favoriteMusic,
+                ),
+              ),
+              // Flyer 2 - Izquierda, parcialmente oculto
+
+              // Flyer 3 - Derecha, parcialmente oculto
+              Positioned(
+                left: iconSize * 1.5,
+                top: iconSize * 0.8,
+                child: MusicFlyerItem(
+                  index: 2,
+                  iconSize: iconSize,
+                  band: bandNames[2],
+                  logoUrl: profile.favoriteMusicLogos[2],
+                  songs: profile.favoriteMusic,
+                ),
+              ),
+            ],
+          ),
         );
       },
-    );
-  }
-
-  Widget _buildFlyer(int index, profile, audioPlayerService) {
-    final bandNames = ['The Beatles', 'Frank Sinatra', 'La La Land'];
-    final band = bandNames[index];
-
-    return GestureDetector(
-      onTap: () async {
-        final songs = audioPlayerService.getSongsForBand(
-          profile.favoriteMusic,
-          band,
-        );
-        if (songs.isNotEmpty) {
-          await audioPlayerService.play(songs.first, band);
-          setState(() => _currentlyPlayingBand = band);
-        }
-      },
-      child: Container(
-        width: widget.iconSize * 0.8,
-        height: widget.iconSize * 0.8,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(6),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              blurRadius: 4,
-              offset: Offset(1, 1),
-            ),
-          ],
-          border: Border.all(
-            color: _currentlyPlayingBand == band
-                ? AppPalette.primaryColor(context)
-                : Colors.white,
-            width: 2,
-          ),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: Image.network(
-            profile.favoriteMusicLogos[index],
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Icon(Icons.music_note),
-          ),
-        ),
-      ),
     );
   }
 }

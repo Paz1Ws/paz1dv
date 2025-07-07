@@ -9,23 +9,34 @@ import 'package:paz1dv/features/home/presentation/widgets/burger_menu_button.dar
 import 'package:paz1dv/features/home/presentation/widgets/animated_signature.dart';
 import 'package:paz1dv/features/home/presentation/widgets/interactive_profile_container.dart';
 import 'package:paz1dv/features/home/presentation/widgets/scroll_indicator.dart';
-import 'package:paz1dv/features/home/presentation/widgets/responsive_action_buttons.dart';
+import 'package:paz1dv/features/home/presentation/widgets/action_buttons.dart';
 import 'package:paz1dv/shared/util/star_painter.dart';
 import 'package:paz1dv/core/providers/data_providers.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:paz1dv/features/about/domain/profile_model.dart';
+import 'package:paz1dv/features/portfolio_controller_providers.dart';
 
 final customSwitchProvider = StateProvider<bool>((ref) => false);
 
-class ProfileScreen extends ConsumerWidget {
+// Convert to ConsumerStatefulWidget
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  // Add a GlobalKey for scroll hooks
+  final _profileSectionKey = GlobalKey();
+
+  @override
+  Widget build(BuildContext context) {
     final locale = Localizations.localeOf(context).languageCode;
     final profileAsync = ref.watch(profileProvider(locale));
 
     return Container(
+      key: _profileSectionKey,
       color: AppPalette.adaptiveColor(context),
       child: profileAsync.when(
         loading: () => const _ProfileSkeleton(),
@@ -48,11 +59,10 @@ class _ProfileSkeleton extends StatelessWidget {
       light: AppPalette.lightGray,
       dark: AppPalette.darkCharcoal,
     );
-
     return Skeletonizer.zone(
       effect: ShimmerEffect(
         baseColor: boneColor,
-        highlightColor: boneColor.withOpacity(0.5),
+        highlightColor: boneColor.withAlpha(128),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -122,6 +132,7 @@ class _ProfileSkeleton extends StatelessWidget {
 
 class _ProfileContent extends ConsumerWidget {
   final ProfileModel profile;
+
   const _ProfileContent({required this.profile});
 
   @override
@@ -133,71 +144,114 @@ class _ProfileContent extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // App bar section
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: isNarrow ? size.width * 0.05 : size.width * 0.2,
-            vertical: isNarrow ? size.height * 0.05 : size.height * 0.08,
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: BurgerMenuButton(size: size),
-              ),
-              AnimatedSignature(
-                width: isNarrow ? size.width * 0.18 : size.width * 0.12,
-                height: isNarrow ? size.height * 0.05 : size.height * 0.06,
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: ActionButtons(size: size, switchValue: switchValue),
-              ),
-            ],
+        FadeInDown(
+          duration: const Duration(milliseconds: 800),
+          curve: Curves.easeOutCubic,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: isNarrow ? size.width * 0.05 : size.width * 0.2,
+              vertical: isNarrow ? size.height * 0.05 : size.height * 0.08,
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SlideInLeft(
+                  duration: const Duration(milliseconds: 600),
+                  delay: const Duration(milliseconds: 200),
+                  curve: Curves.easeOutCubic,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: BurgerMenuButton(size: size),
+                  ),
+                ),
+                AnimatedSignature(
+                  width: isNarrow ? size.width * 0.25 : size.width * 0.12,
+                  height: isNarrow ? size.height * 0.05 : size.height * 0.06,
+                ),
+                SlideInRight(
+                  duration: const Duration(milliseconds: 600),
+                  delay: const Duration(milliseconds: 200),
+                  curve: Curves.easeOutCubic,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: ActionButtons(size: size, switchValue: switchValue),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
 
         Column(
           spacing: isNarrow ? size.height * 0.05 : size.height * 0.05,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
-              child: Text(
-                profile.greeting,
-                style: AppTypography.overline(
-                  context,
-                  color: AppPalette.charcoalGray,
+            // Greeting text con fade in elegante
+            FadeInUp(
+              duration: const Duration(milliseconds: 700),
+              delay: const Duration(milliseconds: 400),
+              curve: Curves.easeOutQuart,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                child: Text(
+                  profile.greeting,
+                  style: AppTypography.overline(
+                    context,
+                    color: AppPalette.charcoalGray,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
 
-            InteractiveProfileContainer(
-              photoUrl: 'assets/images/paz1dv.webp',
-              profileTitle: profile.profileTitle,
-            ),
-
-            CustomPaint(
-              size: const Size(kIconSize32, kIconSize32),
-              painter: StarPainter(AppPalette.primaryColor(context)),
-            ),
-
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: size.width * 0.1,
-                vertical: size.height * 0.02,
+            // Profile container con animación principal
+            ZoomIn(
+              duration: const Duration(milliseconds: 900),
+              delay: const Duration(milliseconds: 600),
+              curve: Curves.elasticOut,
+              child: InteractiveProfileContainer(
+                photoUrl: 'assets/images/paz1dv.webp',
+                profileTitle: profile.profileTitle,
               ),
-              child: Text(
-                profile.resume,
-                style: AppTypography.bodyMedium(
-                  context,
-                  color: AppPalette.reverseAdaptiveColor(context),
+            ),
+
+            // Star icon con pulse sutil para llamar atención
+            Pulse(
+              delay: const Duration(milliseconds: 1200),
+              duration: const Duration(milliseconds: 1000),
+              infinite: false,
+              child: CustomPaint(
+                size: const Size(kIconSize32, kIconSize32),
+                painter: StarPainter(AppPalette.primaryColor(context)),
+              ),
+            ),
+
+            // Resume text con fade in final
+            FadeInUp(
+              duration: const Duration(milliseconds: 600),
+              delay: const Duration(milliseconds: 800),
+              curve: Curves.easeOutCubic,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.1,
+                  vertical: size.height * 0.02,
                 ),
-                textAlign: TextAlign.center,
+                child: Text(
+                  profile.resume,
+                  style: AppTypography.bodyMedium(
+                    context,
+                    color: AppPalette.reverseAdaptiveColor(context),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-            ScrollIndicator(),
+
+            // Scroll indicator con bounce sutil
+            BounceInUp(
+              duration: const Duration(milliseconds: 800),
+              delay: const Duration(milliseconds: 1000),
+              child: const ScrollIndicator(),
+            ),
           ],
         ),
       ],

@@ -123,5 +123,199 @@
     "connectWithMe": "Conecta conmigo",
     "@connectWithMe": {
         "description": "Título de la sección de redes sociales"
+    },
+    "listening": "Escuchando",
+    "@listening": {
+        "description": "Etiqueta para la sección de música o audio actual"
+    },
+    "kanjiKnowledge": "Conocimiento",
+    "@kanjiKnowledge": {
+        "description": "Significado del kanji 知 (chi)"
+    },
+    "kanjiBeauty": "Belleza",
+    "@kanjiBeauty": {
+        "description": "Significado del kanji 美 (bi)"
+    },
+    "kanjiPatience": "Paciencia",
+    "@kanjiPatience": {
+        "description": "Significado del kanji 忍 (nin)"
+    },
+    "kanjiSincerity": "Sinceridad",
+    "@kanjiSincerity": {
+        "description": "Significado del kanji 誠 (sei)"
+    },
+    "kanjiWill": "Voluntad",
+    "@kanjiWill": {
+        "description": "Significado del kanji 志 (shi)"
+    },
+    "kanjiEternity": "Eternidad",
+    "@kanjiEternity": {
+        "description": "Significado del kanji 永 (ei)"
+    },
+    "kanjiRomaji": "{kanji} ({romaji}) - {meaning}",
+    "@kanjiRomaji": {
+        "description": "Formato completo del kanji con romaji y significado",
+        "placeholders": {
+            "kanji": {
+                "type": "String",
+                "description": "El kanji"
+            },
+            "romaji": {
+                "type": "String",
+                "description": "La lectura en romaji"
+            },
+            "meaning": {
+                "type": "String",
+                "description": "El significado del kanji"
+            }
+        }
+    },
+    "chooseBenefit": "Elige tu beneficio",
+    "@chooseBenefit": {
+        "description": "Etiqueta para la sección de selección de beneficios"
+    },
+    "discoverKanjiMessage": "¡Descubre mi kanji favorito y obtén uno de los beneficios sorpresa!",
+    "@discoverKanjiMessage": {
+        "description": "Mensaje placeholder para descubrir los beneficios del kanji"
+    },
+    "benefitTechnicalEvaluation": "Evaluación técnica de tu producto actual",
+    "@benefitTechnicalEvaluation": {
+        "description": "Título para el beneficio de evaluación técnica"
+    },
+    "benefitTechnicalEvaluationDesc": "Revisa a fondo la arquitectura, la performance y la escalabilidad de tu app o sistema.\nRecibe un informe claro con:",
+    "@benefitTechnicalEvaluationDesc": {
+        "description": "Descripción para el beneficio de evaluación técnica"
+    },
+    "benefitTechnicalEvaluationPoint1": "Hallazgos prioritarios que están impactando tu usuario final",
+    "@benefitTechnicalEvaluationPoint1": {
+        "description": "Primer punto del beneficio de evaluación técnica"
+    },
+    "benefitTechnicalEvaluationPoint2": "Recomendaciones prácticas para optimizar tiempos de carga y consumo de recursos",
+    "@benefitTechnicalEvaluationPoint2": {
+        "description": "Segundo punto del beneficio de evaluación técnica"
+    },
+    "benefitTechnicalEvaluationPoint3": "Acciones concretas para mejorar estabilidad y facilitar futuras integraciones",
+    "@benefitTechnicalEvaluationPoint3": {
+        "description": "Tercer punto del beneficio de evaluación técnica"
+    },
+    "benefitExpressConsultation": "Consultoría exprés + 10 % OFF en tu primer mes",
+    "@benefitExpressConsultation": {
+        "description": "Título para el beneficio de consultoría exprés"
+    },
+    "benefitExpressConsultationDesc": "Sesión estratégica de 30 min enfocada en resolver retos críticos o validar decisiones clave.\nTe llevarás:",
+    "@benefitExpressConsultationDesc": {
+        "description": "Descripción para el beneficio de consultoría exprés"
+    },
+    "benefitExpressConsultationPoint1": "Soluciones inmediatas para desbloquear bloqueos técnicos",
+    "@benefitExpressConsultationPoint1": {
+        "description": "Primer punto del beneficio de consultoría exprés"
+    },
+    "benefitExpressConsultationPoint2": "Validación de tu roadmap o de una idea puntual",
+    "@benefitExpressConsultationPoint2": {
+        "description": "Segundo punto del beneficio de consultoría exprés"
+    },
+    "benefitExpressConsultationPoint3": "Un plan de acción claro para tu siguiente sprint",
+    "@benefitExpressConsultationPoint3": {
+        "description": "Tercer punto del beneficio de consultoría exprés"
+    },
+    "benefitExpressConsultationPoint4": "Bonus: Si decides trabajar conmigo, obtienes un 10 % de descuento en tu primer mes de colaboración.",
+    "@benefitExpressConsultationPoint4": {
+        "description": "Cuarto punto del beneficio de consultoría exprés"
+    },
+    "benefitQuickEvaluation": "Evaluación rápida de tu idea o proyecto (30 min)",
+    "@benefitQuickEvaluation": {
+        "description": "Título para el beneficio de evaluación rápida"
+    },
+    "benefitQuickEvaluationDesc": "Cuéntame tu visión rellenando un breve formulario, y en media hora recibirás:",
+    "@benefitQuickEvaluationDesc": {
+        "description": "Descripción para el beneficio de evaluación rápida"
+    },
+    "benefitQuickEvaluationPoint1": "Identificación de riesgos técnicos que podrían frenar tu progreso",
+    "@benefitQuickEvaluationPoint1": {
+        "description": "Primer punto del beneficio de evaluación rápida"
+    },
+    "benefitQuickEvaluationPoint2": "Stack recomendado y alternativas según tu equipo y objetivos",
+    "@benefitQuickEvaluationPoint2": {
+        "description": "Segundo punto del beneficio de evaluación rápida"
+    },
+    "benefitQuickEvaluationPoint3": "Primeros pasos claros y calendario tentativo de hitos",
+    "@benefitQuickEvaluationPoint3": {
+        "description": "Tercer punto del beneficio de evaluación rápida"
+    },
+    "benefitQuickEvaluationPoint4": "Un feedback de alto impacto en solo 30 min, sin perder tiempo en explicaciones innecesarias.",
+    "@benefitQuickEvaluationPoint4": {
+        "description": "Cuarto punto del beneficio de evaluación rápida"
+    },
+    "message": "Mensaje",
+    "@message": {
+        "description": "Generic label for mensaje"
+    },
+    "messagePlaceholder": "Aquí va tu mensaje para mí",
+    "@messagePlaceholder": {
+        "description": "Texto placeholder para el campo de mensaje"
+    },
+    "contactEmailLabel": "Email",
+    "@contactEmailLabel": {
+        "description": "Etiqueta para el campo de correo electrónico en el formulario de contacto"
+    },
+    "contactEmailHint": "tu@email.com",
+    "@contactEmailHint": {
+        "description": "Texto de sugerencia para el campo de correo electrónico en el formulario de contacto"
+    },
+    "sendLabel": "Enviar",
+    "@sendLabel": {
+        "description": "Etiqueta para el botón de enviar en el formulario de contacto"
+    },
+    "contactSubjectLabel": "Asunto",
+    "@contactSubjectLabel": {
+        "description": "Etiqueta para el campo de asunto en el formulario de contacto"
+    },
+    "contactSubjectHint": "¿Sobre qué trata tu mensaje?",
+    "@contactSubjectHint": {
+        "description": "Texto de sugerencia para el campo de asunto en el formulario de contacto"
+    },
+    "kanjiFavorite": "Es mi favorito",
+    "@kanjiFavorite": {
+        "description": "Etiqueta para indicar que un kanji es el favorito"
+    },
+    "errorSendingMessage": "Oops, hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.",
+    "@errorSendingMessage": {
+        "description": "Mensaje de error mostrado cuando falla el envío de un mensaje"
+    },
+    "messageSentSuccess": "¡Tu mensaje fue enviado exitosamente!",
+    "@messageSentSuccess": {
+        "description": "Mensaje de éxito mostrado cuando un mensaje se envía correctamente"
+    },
+    "selectedBenefit": "Beneficio seleccionado",
+    "@selectedBenefit": {
+        "description": "Etiqueta para indicar el beneficio que ha sido seleccionado"
+    },
+    "errorInvalidEmail": "Por favor, ingresa una dirección de correo electrónico válida.",
+    "@errorInvalidEmail": {
+        "description": "Mensaje de error para correo electrónico no válido"
+    },
+    "errorMessageTooLong": "El mensaje debe tener menos de 1000 caracteres.",
+    "@errorMessageTooLong": {
+        "description": "Mensaje de error cuando el mensaje supera los 1000 caracteres"
+    },
+    "errorMessageTooShort": "El mensaje debe tener al menos 5 caracteres.",
+    "@errorMessageTooShort": {
+        "description": "Mensaje de error cuando el mensaje tiene menos de 10 caracteres"
+    },
+    "errorMessageRequired": "El mensaje es obligatorio.",
+    "@errorMessageRequired": {
+        "description": "Mensaje de error cuando el mensaje es requerido"
+    },
+    "errorSubjectTooShort": "El asunto debe tener al menos 10 caracteres.",
+    "@errorSubjectTooShort": {
+        "description": "Mensaje de error cuando el asunto tiene menos de 10 caracteres"
+    },
+    "errorEmailRequired": "El correo electrónico es obligatorio.",
+    "@errorEmailRequired": {
+        "description": "Mensaje de error cuando el correo electrónico es requerido"
+    },
+    "mayIHelpYou": "¿En qué puedo ayudarte?",
+    "@mayIHelpYou": {
+        "description": "Texto para ofrecer ayuda al usuario"
     }
 }

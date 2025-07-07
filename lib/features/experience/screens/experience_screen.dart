@@ -10,19 +10,35 @@ final selectedExperienceProvider = StateProvider<ExperienceModel?>(
   (ref) => null,
 );
 
-class ExperienceScreen extends ConsumerWidget {
+// Provider to track if the experience section animation has been played
+final experienceAnimationPlayedProvider = StateProvider<bool>((ref) => false);
+
+class ExperienceScreen extends ConsumerStatefulWidget {
   const ExperienceScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ExperienceScreen> createState() => _ExperienceScreenState();
+}
+
+class _ExperienceScreenState extends ConsumerState<ExperienceScreen> {
+  final _experienceSectionKey = GlobalKey();
+  bool _hasAnimated = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final selectedExperience = ref.watch(selectedExperienceProvider);
     final size = MediaQuery.sizeOf(context);
     final locale = Localizations.localeOf(context).languageCode;
 
-    // Use the experiences provider to fetch data from API
     final experiencesAsync = ref.watch(experiencesProvider(locale));
 
     return Container(
+      key: _experienceSectionKey,
       color: AppPalette.adaptiveColor(context),
       child: experiencesAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -34,10 +50,16 @@ class ExperienceScreen extends ConsumerWidget {
             return FadeTransition(opacity: animation, child: child);
           },
           child: selectedExperience == null
-              ? ExperienceGrid(experienceItems: experiences, size: size)
+              ? ExperienceGrid(
+                  key: const ValueKey('grid'),
+                  experienceItems: experiences,
+                  size: size,
+                  animate: _hasAnimated,
+                )
               : ExperienceDetailView(
                   key: ValueKey(selectedExperience.title),
                   item: selectedExperience,
+                  animate: _hasAnimated,
                   onBack: () =>
                       ref.read(selectedExperienceProvider.notifier).state =
                           null,

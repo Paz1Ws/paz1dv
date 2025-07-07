@@ -283,6 +283,276 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect with me'**
   String get connectWithMe;
+
+  /// Label for listening section or activity
+  ///
+  /// In en, this message translates to:
+  /// **'Listening'**
+  String get listening;
+
+  /// Meaning of the kanji 知 (chi)
+  ///
+  /// In en, this message translates to:
+  /// **'Knowledge'**
+  String get kanjiKnowledge;
+
+  /// Meaning of the kanji 美 (bi)
+  ///
+  /// In en, this message translates to:
+  /// **'Beauty'**
+  String get kanjiBeauty;
+
+  /// Meaning of the kanji 忍 (nin)
+  ///
+  /// In en, this message translates to:
+  /// **'Patience'**
+  String get kanjiPatience;
+
+  /// Meaning of the kanji 誠 (sei)
+  ///
+  /// In en, this message translates to:
+  /// **'Sincerity'**
+  String get kanjiSincerity;
+
+  /// Meaning of the kanji 志 (shi)
+  ///
+  /// In en, this message translates to:
+  /// **'Will'**
+  String get kanjiWill;
+
+  /// Meaning of the kanji 永 (ei)
+  ///
+  /// In en, this message translates to:
+  /// **'Eternity'**
+  String get kanjiEternity;
+
+  /// Complete kanji format with romaji and meaning
+  ///
+  /// In en, this message translates to:
+  /// **'{kanji} ({romaji}) - {meaning}'**
+  String kanjiRomaji(String kanji, String romaji, String meaning);
+
+  /// Label for benefit selection section
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your benefit'**
+  String get chooseBenefit;
+
+  /// Placeholder message to discover kanji benefits
+  ///
+  /// In en, this message translates to:
+  /// **'Discover my favorite kanji and get one of the surprise benefits!'**
+  String get discoverKanjiMessage;
+
+  /// Title for technical evaluation benefit
+  ///
+  /// In en, this message translates to:
+  /// **'Technical evaluation of your current product'**
+  String get benefitTechnicalEvaluation;
+
+  /// Description for technical evaluation benefit
+  ///
+  /// In en, this message translates to:
+  /// **'Thoroughly review the architecture, performance and scalability of your app or system.\nReceive a clear report with:'**
+  String get benefitTechnicalEvaluationDesc;
+
+  /// First benefit point for technical evaluation
+  ///
+  /// In en, this message translates to:
+  /// **'Priority findings that are impacting your end user'**
+  String get benefitTechnicalEvaluationPoint1;
+
+  /// Second benefit point for technical evaluation
+  ///
+  /// In en, this message translates to:
+  /// **'Practical recommendations to optimize loading times and resource consumption'**
+  String get benefitTechnicalEvaluationPoint2;
+
+  /// Third benefit point for technical evaluation
+  ///
+  /// In en, this message translates to:
+  /// **'Concrete actions to improve stability and facilitate future integrations'**
+  String get benefitTechnicalEvaluationPoint3;
+
+  /// Title for express consultation benefit
+  ///
+  /// In en, this message translates to:
+  /// **'Express consultation + 10% OFF on your first month'**
+  String get benefitExpressConsultation;
+
+  /// Description for express consultation benefit
+  ///
+  /// In en, this message translates to:
+  /// **'30-min strategic session focused on solving critical challenges or validating key decisions.\nYou\'ll get:'**
+  String get benefitExpressConsultationDesc;
+
+  /// First benefit point for express consultation
+  ///
+  /// In en, this message translates to:
+  /// **'Immediate solutions to unblock technical bottlenecks'**
+  String get benefitExpressConsultationPoint1;
+
+  /// Second benefit point for express consultation
+  ///
+  /// In en, this message translates to:
+  /// **'Validation of your roadmap or a specific idea'**
+  String get benefitExpressConsultationPoint2;
+
+  /// Third benefit point for express consultation
+  ///
+  /// In en, this message translates to:
+  /// **'A clear action plan for your next sprint'**
+  String get benefitExpressConsultationPoint3;
+
+  /// Fourth benefit point for express consultation
+  ///
+  /// In en, this message translates to:
+  /// **'Bonus: If you decide to work with me, you get a 10% discount on your first month of collaboration.'**
+  String get benefitExpressConsultationPoint4;
+
+  /// Title for quick evaluation benefit
+  ///
+  /// In en, this message translates to:
+  /// **'Quick evaluation of your idea or project (30 min)'**
+  String get benefitQuickEvaluation;
+
+  /// Description for quick evaluation benefit
+  ///
+  /// In en, this message translates to:
+  /// **'Tell me your vision by filling out a brief form, and in half an hour you\'ll receive:'**
+  String get benefitQuickEvaluationDesc;
+
+  /// First benefit point for quick evaluation
+  ///
+  /// In en, this message translates to:
+  /// **'Identification of technical risks that could slow your progress'**
+  String get benefitQuickEvaluationPoint1;
+
+  /// Second benefit point for quick evaluation
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended stack and alternatives according to your team and objectives'**
+  String get benefitQuickEvaluationPoint2;
+
+  /// Third benefit point for quick evaluation
+  ///
+  /// In en, this message translates to:
+  /// **'Clear first steps and tentative milestone calendar'**
+  String get benefitQuickEvaluationPoint3;
+
+  /// Fourth benefit point for quick evaluation
+  ///
+  /// In en, this message translates to:
+  /// **'High-impact feedback in just 30 min, without wasting time on unnecessary explanations.'**
+  String get benefitQuickEvaluationPoint4;
+
+  /// Generic label for message
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get message;
+
+  /// Placeholder text for the message input field
+  ///
+  /// In en, this message translates to:
+  /// **'Here goes your message for me'**
+  String get messagePlaceholder;
+
+  /// Label for the email input field in the contact form
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get contactEmailLabel;
+
+  /// Hint text for the email input field in the contact form
+  ///
+  /// In en, this message translates to:
+  /// **'your@email.com'**
+  String get contactEmailHint;
+
+  /// Label for the send button in the contact form
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get sendLabel;
+
+  /// Label for the subject input field in the contact form
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get contactSubjectLabel;
+
+  /// Hint text for the subject input field in the contact form
+  ///
+  /// In en, this message translates to:
+  /// **'What is your message about?'**
+  String get contactSubjectHint;
+
+  /// Label for the favorite kanji section
+  ///
+  /// In en, this message translates to:
+  /// **'My Favorite Kanji'**
+  String get kanjiFavorite;
+
+  /// Error message shown when sending a message fails
+  ///
+  /// In en, this message translates to:
+  /// **'There was an error sending your message. Please try again.'**
+  String get errorSendingMessage;
+
+  /// Success message shown when a message is sent successfully
+  ///
+  /// In en, this message translates to:
+  /// **'Your message was sent successfully!'**
+  String get messageSentSuccess;
+
+  /// Label for the selected benefit
+  ///
+  /// In en, this message translates to:
+  /// **'Selected benefit'**
+  String get selectedBenefit;
+
+  /// Error message for invalid email address
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address.'**
+  String get errorInvalidEmail;
+
+  /// Error message when the message exceeds 1000 characters
+  ///
+  /// In en, this message translates to:
+  /// **'The message must be less than 1000 characters.'**
+  String get errorMessageTooLong;
+
+  /// Error message when the message is less than 10 characters
+  ///
+  /// In en, this message translates to:
+  /// **'The message must be at least 5 characters.'**
+  String get errorMessageTooShort;
+
+  /// Error message when the message is required
+  ///
+  /// In en, this message translates to:
+  /// **'The message is required.'**
+  String get errorMessageRequired;
+
+  /// Error message when the subject is less than 10 characters
+  ///
+  /// In en, this message translates to:
+  /// **'The subject must be at least 10 characters.'**
+  String get errorSubjectTooShort;
+
+  /// Error message when the email is required
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required.'**
+  String get errorEmailRequired;
+
+  /// Prompt asking if the user needs help
+  ///
+  /// In en, this message translates to:
+  /// **'May I help you?'**
+  String get mayIHelpYou;
 }
 
 class _AppLocalizationsDelegate

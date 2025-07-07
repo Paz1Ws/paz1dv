@@ -29,7 +29,20 @@ class ApiService {
         '/experiences?select=*,experience_translations(*)&experience_translations.locale=eq.$locale',
       );
       final data = response.data as List;
-      return data.map((item) => ExperienceModel.fromJson(item)).toList();
+      final experiences = data
+          .map((item) => ExperienceModel.fromJson(item))
+          .toList();
+
+      // Ordenar: primero los que tengan un número como primera letra en "client"
+      experiences.sort((a, b) {
+        final aStartsWithNumber = RegExp(r'^\d').hasMatch(a.client ?? '');
+        final bStartsWithNumber = RegExp(r'^\d').hasMatch(b.client ?? '');
+        if (aStartsWithNumber && !bStartsWithNumber) return -1;
+        if (!aStartsWithNumber && bStartsWithNumber) return 1;
+        return 0;
+      });
+
+      return experiences;
     } catch (e) {
       throw Exception('Failed to load experiences: $e');
     }

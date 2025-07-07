@@ -43,4 +43,30 @@ class UrlLauncherUtil {
   static Future<void> launchFigma() async {
     await launchURL(figmaUrl);
   }
+
+  /// Launch email with subject and body using mailto
+  static Future<void> launchEmail({
+    required String email,
+    String? subject,
+    String? body,
+  }) async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: email,
+      query: _encodeQueryParameters(<String, String>{
+        if (subject != null) 'subject': subject,
+        if (body != null) 'body': body,
+      }),
+    );
+    await launchURL(emailUri.toString());
+  }
+
+  static String? _encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map(
+          (e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}',
+        )
+        .join('&');
+  }
 }

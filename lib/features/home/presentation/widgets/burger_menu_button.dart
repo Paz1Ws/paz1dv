@@ -19,9 +19,7 @@ class BurgerMenuButton extends ConsumerWidget {
     final isHovered = ref.watch(toggleBurgerMenuProvider);
     final isTapped = ref.watch(isBurgerMenuTappedProvider);
     final isNarrow = ResponsiveConstants.isNarrowScreen(context);
-
-    // Use size parameter and constants instead of hardcoded values
-    final containerWidth = isNarrow ? size.width * 0.06 : size.width * 0.025;
+    final containerWidth = isNarrow ? size.width * 0.09 : size.width * 0.025;
     final containerHeight = isNarrow ? size.height * 0.03 : size.height * 0.025;
     final barHeight = isNarrow ? kStroke3 : kStroke4;
 
@@ -54,7 +52,7 @@ class BurgerMenuButton extends ConsumerWidget {
           }
         },
         onExit: (_) {
-           ref.read(toggleBurgerMenuProvider.notifier).state = false;
+          ref.read(toggleBurgerMenuProvider.notifier).state = false;
         },
         child: SizedBox(
           width: containerWidth,
@@ -168,7 +166,7 @@ class _BurgerBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
         boxShadow: [
           BoxShadow(
-            color: Colors.black26,
+            color: AppPalette.darkMode,
             blurRadius: isHovered ? kSpacing8 : kStroke2,
             offset: Offset(0, isHovered ? kStroke4 : kStroke1),
           ),
