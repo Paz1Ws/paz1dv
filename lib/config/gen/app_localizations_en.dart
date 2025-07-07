@@ -264,4 +264,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mayIHelpYou => 'May I help you?';
+
+  @override
+  String get madeBy =>
+      'Made by Christopher Paz León (and AI colaborators 😎) in 2025';
+
+  @override
+  String get experienceIndustry => 'Industry';
+
+  @override
+  String get experienceClient => 'Client';
+
+  @override
+  String get experienceService => 'Service';
+
+  @override
+  String get experienceDate => 'Date';
+
+  @override
+  String get imageNotAvailable => 'Image not available';
 }

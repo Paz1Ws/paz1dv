@@ -265,4 +265,23 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get mayIHelpYou => '¿En qué puedo ayudarte?';
+
+  @override
+  String get madeBy =>
+      'Hecho por Christopher Paz León (y colaboradores IA 😎) en 2025';
+
+  @override
+  String get experienceIndustry => 'Industria';
+
+  @override
+  String get experienceClient => 'Cliente';
+
+  @override
+  String get experienceService => 'Servicio';
+
+  @override
+  String get experienceDate => 'Fecha';
+
+  @override
+  String get imageNotAvailable => 'Imagen no disponible';
 }

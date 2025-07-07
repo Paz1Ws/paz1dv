@@ -45,7 +45,7 @@ class _ContactScreenState extends State<ContactScreen>
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final isNarrow = ResponsiveConstants.isNarrowScreen(context);
-
+    final localizations = AppLocalizations.of(context)!;
     return SizedBox(
       height: isNarrow ? null : size.height,
       child: Stack(
@@ -65,6 +65,10 @@ class _ContactScreenState extends State<ContactScreen>
                   child: const ContactForm(),
                 ),
                 SocialMediaButtons(size: size),
+                Text(
+                  localizations.madeBy,
+                  style: AppTypography.caption(context),
+                ),
                 SizedBox(height: size.height * 0.01),
               ],
             ),
@@ -81,6 +85,11 @@ class _ContactScreenState extends State<ContactScreen>
                     child: const ContactForm(),
                   ),
                   SocialMediaButtons(size: size),
+
+                  Text(
+                    localizations.madeBy,
+                    style: AppTypography.caption(context),
+                  ),
                   SizedBox(height: size.height * 0.01),
                 ],
               ),

@@ -317,5 +317,19 @@
     "mayIHelpYou": "¿En qué puedo ayudarte?",
     "@mayIHelpYou": {
         "description": "Texto para ofrecer ayuda al usuario"
-    }
+    },
+    "madeBy": "Hecho por Christopher Paz León (y colaboradores IA 😎) en 2025",
+    "@madeBy": {
+        "description": "Crédito de autoría y año"
+    },
+    "experienceIndustry": "Industria",
+    "@experienceIndustry": { "description": "Etiqueta para industria en detalle de experiencia" },
+    "experienceClient": "Cliente",
+    "@experienceClient": { "description": "Etiqueta para cliente en detalle de experiencia" },
+    "experienceService": "Servicio",
+    "@experienceService": { "description": "Etiqueta para servicio en detalle de experiencia" },
+    "experienceDate": "Fecha",
+    "@experienceDate": { "description": "Etiqueta para fecha en detalle de experiencia" },
+    "imageNotAvailable": "Imagen no disponible",
+    "@imageNotAvailable": { "description": "Texto alternativo para imagen no disponible" }
 }

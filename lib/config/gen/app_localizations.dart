@@ -553,6 +553,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'May I help you?'**
   String get mayIHelpYou;
+
+  /// Authorship credit and year
+  ///
+  /// In en, this message translates to:
+  /// **'Made by Christopher Paz León (and AI colaborators 😎) in 2025'**
+  String get madeBy;
+
+  /// Label for industry in experience detail
+  ///
+  /// In en, this message translates to:
+  /// **'Industry'**
+  String get experienceIndustry;
+
+  /// Label for client in experience detail
+  ///
+  /// In en, this message translates to:
+  /// **'Client'**
+  String get experienceClient;
+
+  /// Label for service in experience detail
+  ///
+  /// In en, this message translates to:
+  /// **'Service'**
+  String get experienceService;
+
+  /// Label for date in experience detail
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get experienceDate;
+
+  /// Fallback text for unavailable images
+  ///
+  /// In en, this message translates to:
+  /// **'Image not available'**
+  String get imageNotAvailable;
 }
 
 class _AppLocalizationsDelegate

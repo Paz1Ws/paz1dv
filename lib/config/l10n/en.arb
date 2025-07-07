@@ -317,5 +317,19 @@
     "mayIHelpYou": "May I help you?",
     "@mayIHelpYou": {
         "description": "Prompt asking if the user needs help"
-    }
+    },
+    "madeBy": "Made by Christopher Paz León (and AI colaborators 😎) in 2025",
+    "@madeBy": {
+        "description": "Authorship credit and year"
+    },
+    "experienceIndustry": "Industry",
+    "@experienceIndustry": { "description": "Label for industry in experience detail" },
+    "experienceClient": "Client",
+    "@experienceClient": { "description": "Label for client in experience detail" },
+    "experienceService": "Service",
+    "@experienceService": { "description": "Label for service in experience detail" },
+    "experienceDate": "Date",
+    "@experienceDate": { "description": "Label for date in experience detail" },
+    "imageNotAvailable": "Image not available",
+    "@imageNotAvailable": { "description": "Fallback text for unavailable images" }
 }

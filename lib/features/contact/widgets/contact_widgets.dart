@@ -485,8 +485,8 @@ class _KanjiDiscoverMessage extends StatelessWidget {
     IconData displayIcon;
     bool isKanjiSelected = selectedKanji != null;
     if (isKanjiSelected && selectedKanji == '永' && showBenefits) {
-      // Special case for eternity kanji with benefits shown
-      displayText = '${selectedKanji!} - ${localizations.kanjiFavorite}';
+      displayText =
+          '(${_getKanjiMeaning(selectedKanji!, localizations)}) - ${selectedKanji!} - ${localizations.kanjiFavorite}';
       displayIcon = Icons.auto_awesome;
     } else if (isKanjiSelected && !showBenefits) {
       // Regular kanji selected (including eternity without benefits)

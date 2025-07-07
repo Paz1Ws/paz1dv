@@ -9,6 +9,7 @@ import 'package:paz1dv/config/constants/responsive_constants.dart';
 import 'package:paz1dv/features/experience/domain/experience_model.dart';
 import 'package:paz1dv/features/experience/widgets/detail_item.dart';
 import 'package:paz1dv/shared/util/text_parser.dart';
+import 'package:paz1dv/config/gen/app_localizations.dart';
 import 'dart:async';
 
 class ExperienceDetailView extends ConsumerWidget {
@@ -103,14 +104,12 @@ class _Content extends StatelessWidget {
   final ExperienceModel item;
   final bool isNarrow;
 
-  const _Content({
-    required this.item,
-    required this.isNarrow,
-  });
+  const _Content({required this.item, required this.isNarrow});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
+    final localizations = AppLocalizations.of(context)!;
     return Flex(
       direction: isNarrow ? Axis.vertical : Axis.horizontal,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,12 +124,15 @@ class _Content extends StatelessWidget {
                 children: [
                   Expanded(
                     child: DetailItem(
-                      title: 'Industry',
+                      title: localizations.experienceIndustry,
                       value: item.industry,
                     ),
                   ),
                   Expanded(
-                    child: DetailItem(title: 'Client', value: item.client),
+                    child: DetailItem(
+                      title: localizations.experienceClient,
+                      value: item.client,
+                    ),
                   ),
                 ],
               ),
@@ -139,13 +141,13 @@ class _Content extends StatelessWidget {
                 children: [
                   Expanded(
                     child: DetailItem(
-                      title: 'Service',
+                      title: localizations.experienceService,
                       value: item.service,
                     ),
                   ),
                   Expanded(
                     child: DetailItem(
-                      title: 'Date',
+                      title: localizations.experienceDate,
                       value: item.formattedDateRange(context),
                     ),
                   ),
@@ -208,11 +210,30 @@ class _ImageCarouselState extends State<_ImageCarousel> {
     super.dispose();
   }
 
+  void _showImageDialog(BuildContext context, String imageUrl) {
+    showDialog(
+      context: context,
+      builder: (_) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: InteractiveViewer(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Image.network(imageUrl, fit: BoxFit.contain),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final images = widget.item.carouselImages;
     final hasImages = images.isNotEmpty;
+    final localizations = AppLocalizations.of(context)!;
 
     final carouselHeight = size.height * 0.4;
     final carouselWidth = size.width * 0.6;
@@ -233,34 +254,48 @@ class _ImageCarouselState extends State<_ImageCarousel> {
                 });
               },
               itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(kRadius12),
-                    color: AppPalette.darkCharcoal,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(kRadius12),
-                    child: Image.network(
-                      images[index],
-                      fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: AppPalette.darkCharcoal,
-                            borderRadius: BorderRadius.circular(kRadius12),
+                return GestureDetector(
+                  onTap: () => _showImageDialog(context, images[index]),
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: AnimatedScale(
+                      scale: 1.0,
+                      duration: const Duration(milliseconds: 200),
+                      child: Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: size.width * 0.01,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(kRadius12),
+                          color: AppPalette.darkCharcoal,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(kRadius12),
+                          child: Image.network(
+                            images[index],
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: AppPalette.darkCharcoal,
+                                  borderRadius: BorderRadius.circular(
+                                    kRadius12,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    localizations.imageNotAvailable,
+                                    style: AppTypography.bodySmall(
+                                      context,
+                                      color: AppPalette.lightMode,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                          child: Center(
-                            child: Text(
-                              'Image not available',
-                              style: AppTypography.bodySmall(
-                                context,
-                                color: AppPalette.lightMode,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                        ),
+                      ),
                     ),
                   ),
                 );
@@ -289,10 +324,9 @@ class _ImageCarouselState extends State<_ImageCarousel> {
         ],
       );
     } else {
-      // Fallback to background image if no carousel images
       return Container(
         height: carouselHeight,
-        width: carouselWidth,
+        width: size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(kRadius12),
           image: DecorationImage(

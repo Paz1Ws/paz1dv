@@ -23,6 +23,7 @@ class MainApp extends ConsumerWidget {
     final themeMode = ref.watch(themeModeProvider);
 
     return MaterialApp(
+      title: 'Paz1Dv Studio',
       home: ResponsiveBreakpoints.builder(
         child: const PortfolioHomeScreen(),
         breakpoints: ResponsiveConstants.breakpoints,
