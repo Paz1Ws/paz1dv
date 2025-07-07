@@ -7,6 +7,7 @@ import 'package:paz1dv/config/constants/responsive_constants.dart';
 import 'package:paz1dv/features/education/education_providers.dart';
 import 'package:paz1dv/features/education/widgets/education_content.dart';
 import 'package:paz1dv/core/providers/data_providers.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class EducationScreen extends ConsumerStatefulWidget {
   const EducationScreen({super.key});
@@ -21,7 +22,7 @@ class _EducationScreenState extends ConsumerState<EducationScreen> {
   Timer? _syncTimer;
 
   final _educationSectionKey = GlobalKey();
-  bool _hasAnimated = false;
+  final bool _hasAnimated = false;
 
   @override
   void initState() {
@@ -33,47 +34,10 @@ class _EducationScreenState extends ConsumerState<EducationScreen> {
     );
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkVisibilityAndAnimate();
       if (mounted && ResponsiveConstants.isNarrowScreen(context)) {
         _startSynchronizedAutoScroll();
       }
     });
-  }
-
-  void _checkVisibilityAndAnimate() {
-    if (mounted && !_hasAnimated) {
-      final educationAnimationPlayed = ref.read(
-        educationAnimationPlayedProvider,
-      );
-      if (!educationAnimationPlayed) {
-        final renderBox =
-            _educationSectionKey.currentContext?.findRenderObject()
-                as RenderBox?;
-        if (renderBox != null) {
-          final viewportOffset = renderBox.localToGlobal(Offset.zero);
-          final screenHeight = MediaQuery.of(context).size.height;
-
-          if (viewportOffset.dy < screenHeight &&
-              viewportOffset.dy > -renderBox.size.height / 2) {
-            ref.read(educationAnimationPlayedProvider.notifier).state = true;
-            if (mounted) {
-              setState(() => _hasAnimated = true);
-            }
-          }
-        }
-      } else {
-        if (mounted) {
-          setState(() => _hasAnimated = true);
-        }
-      }
-    }
-
-    if (mounted && !_hasAnimated) {
-      Future.delayed(
-        const Duration(milliseconds: 200),
-        _checkVisibilityAndAnimate,
-      );
-    }
   }
 
   void _startSynchronizedAutoScroll() {
@@ -129,7 +93,7 @@ class _EducationScreenState extends ConsumerState<EducationScreen> {
       key: _educationSectionKey,
       color: AppPalette.adaptiveColor(context),
       child: educationAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => _EducationSkeleton(size: size, isNarrow: isNarrow),
         error: (e, _) => Center(child: Text('Error: $e')),
         data: (skillsData) => Column(
           mainAxisSize: MainAxisSize.min,
@@ -193,6 +157,127 @@ class EducationFooterText extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _EducationSkeleton extends StatelessWidget {
+  final Size size;
+  final bool isNarrow;
+
+  const _EducationSkeleton({required this.size, required this.isNarrow});
+
+  @override
+  Widget build(BuildContext context) {
+    final boneColor = AppPalette.adaptiveColor(
+      context,
+      light: AppPalette.lightGray,
+      dark: AppPalette.darkCharcoal,
+    );
+
+    return Skeletonizer.zone(
+      effect: ShimmerEffect(
+        baseColor: boneColor,
+        highlightColor: boneColor.withAlpha(128),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        spacing: kSpacing20,
+        children: [
+          if (isNarrow)
+            Column(
+              spacing: kSpacing20,
+              children: [
+                _CarouselRowSkeleton(size: size),
+                _CarouselRowSkeleton(size: size),
+              ],
+            )
+          else
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: kSpacing20,
+                mainAxisSpacing: kSpacing20,
+                childAspectRatio: 3.0,
+              ),
+              itemCount: 4,
+              itemBuilder: (context, index) => _EducationCardSkeleton(size: size),
+            ),
+          Row(
+            children: [
+              const Spacer(flex: 1),
+              Flexible(
+                fit: FlexFit.tight,
+                flex: 6,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Bone.multiText(
+                    lines: 3,
+                    width: size.width * 0.4,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: kSpacing20),
+        ],
+      ),
+    );
+  }
+}
+
+class _CarouselRowSkeleton extends StatelessWidget {
+  final Size size;
+  const _CarouselRowSkeleton({required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: size.height * 0.15,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 3,
+        itemBuilder: (context, index) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: kSpacing8),
+          child: _EducationCardSkeleton(size: size),
+        ),
+      ),
+    );
+  }
+}
+
+class _EducationCardSkeleton extends StatelessWidget {
+  final Size size;
+  const _EducationCardSkeleton({required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size.width * 0.7,
+      padding: const EdgeInsets.all(kPadding16),
+      decoration: BoxDecoration(
+        color: AppPalette.lightGray.withAlpha(30),
+        borderRadius: BorderRadius.circular(kRadius12),
+      ),
+      child: Row(
+        spacing: kSpacing12,
+        children: [
+          Bone.circle(size: size.width * 0.08),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: kSpacing8,
+              children: [
+                Bone.text(width: size.width * 0.3),
+                Bone.multiText(lines: 2, width: size.width * 0.25),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -107,7 +107,7 @@ class _JapaneseBackgroundAnimationState
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
     final selectedKanji = ref.watch(selectedKanjiProvider);
 
     final animation = _isAnyKanjiHovered

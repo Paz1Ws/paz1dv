@@ -26,23 +26,18 @@ class PortfolioHomeScreen extends ConsumerStatefulWidget {
 }
 
 class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
-  final Map<PortfolioSection, GlobalKey> _sectionKeys = {
-    PortfolioSection.profile: GlobalKey(),
-    PortfolioSection.about: GlobalKey(),
-    PortfolioSection.education: GlobalKey(),
-    PortfolioSection.experience: GlobalKey(),
-    PortfolioSection.skills: GlobalKey(),
-    PortfolioSection.contact: GlobalKey(),
-  };
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   void _scrollToSection(PortfolioSection section) {
-    final context = _sectionKeys[section]?.currentContext;
-    if (context != null) {
-      Scrollable.ensureVisible(
-        context,
-        duration: const Duration(seconds: 1),
-        curve: Curves.easeInOutCubic,
-      );
+    final targetIndex = sectionToIndexMap[section];
+    if (targetIndex != null) {
+      ref.read(scrollToIndexProvider.notifier).state = targetIndex;
     }
   }
 
@@ -52,74 +47,77 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
     final isNarrow = ResponsiveConstants.isNarrowScreen(context);
 
     return [
-      // Profile section
-      ProfileScreen(key: _sectionKeys[PortfolioSection.profile]!),
-      // About section
+      // 0: Profile section
+      const ProfileScreen(),
+
+      // 1: About section
       Padding(
         padding: EdgeInsets.symmetric(
           horizontal: isNarrow ? size.width * 0.05 : size.width * 0.08,
         ),
         child: Column(
-          key: _sectionKeys[PortfolioSection.about],
           children: [
             SectionDivider(title: localizations.aboutLabel),
             const AboutScreen(),
           ],
         ),
       ),
-      // Education section
+
+      // 2: Education section
       Padding(
         padding: EdgeInsets.symmetric(
           horizontal: isNarrow ? size.width * 0.05 : size.width * 0.08,
         ),
         child: Column(
-          key: _sectionKeys[PortfolioSection.education],
           children: [
             SectionDivider(title: localizations.educationLabel),
             const EducationScreen(),
           ],
         ),
       ),
-      // Experience section
+
+      // 3: Experience section
       Padding(
         padding: EdgeInsets.symmetric(
           horizontal: isNarrow ? size.width * 0.05 : size.width * 0.08,
         ),
         child: Column(
-          key: _sectionKeys[PortfolioSection.experience],
           children: [
             SectionDivider(title: localizations.experienceLabel),
             const ExperienceScreen(),
           ],
         ),
       ),
-      // Skills section
+
+      // 4: Skills section
       Padding(
         padding: EdgeInsets.symmetric(
           horizontal: isNarrow ? size.width * 0.05 : size.width * 0.08,
         ),
         child: Column(
-          key: _sectionKeys[PortfolioSection.skills],
           children: [
             SectionDivider(title: localizations.skillsLabel),
             const SkillsScreen(),
           ],
         ),
       ),
-      // Contact divider
+
+      // 5: Contact divider
       Padding(
         padding: EdgeInsets.symmetric(
           horizontal: isNarrow ? size.width * 0.05 : size.width * 0.08,
         ),
         child: SectionDivider(title: localizations.contactLabel),
       ),
-      // Contact section
-      ContactScreen(key: _sectionKeys[PortfolioSection.contact]),
+
+      // 6: Contact section
+      const ContactScreen(),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
+    // Escuchar cambios de scroll target
     ref.listen<PortfolioSection?>(scrollTargetProvider, (previous, next) {
       if (next != null) {
         _scrollToSection(next);
@@ -129,10 +127,27 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
       }
     });
 
-    // Listen to remix button state to manage global indicator
+    // Escuchar cambios de scroll por índice
+    ref.listen<int?>(scrollToIndexProvider, (previous, next) {
+      if (next != null && _scrollController.hasClients) {
+        // Scroll suave al índice
+        final itemHeight = MediaQuery.sizeOf(context).height;
+        final targetOffset = next * itemHeight;
+
+        _scrollController.animateTo(
+          targetOffset.clamp(0.0, _scrollController.position.maxScrollExtent),
+          duration: const Duration(seconds: 1),
+          curve: Curves.easeInOutCubic,
+        );
+
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          ref.read(scrollToIndexProvider.notifier).state = null;
+        });
+      }
+    });
+
     ref.listen<bool>(remixButtonTappedProvider, (previous, next) {
       if (next == false) {
-        // When remix button is disabled, hide global indicator
         ref.read(audioStateProvider.notifier).stopPlaying();
       }
     });
@@ -149,6 +164,7 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
         Scaffold(
           backgroundColor: AppPalette.adaptiveColor(context),
           body: ListView.builder(
+            controller: _scrollController,
             itemCount: sections.length,
             itemBuilder: (context, index) {
               return sections[index];
@@ -156,65 +172,51 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
           ),
         ),
 
-        Align(
-          alignment: Alignment.centerRight,
-          child: Column(
-            spacing: kSpacing12,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              if (!isNarrow && showRemix == false)
-                Padding(
-                  padding: const EdgeInsets.only(right: 46.0, bottom: 36.0),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: ScrollToTopButton(
-                      onTap: () => _scrollToSection(PortfolioSection.profile),
-                    ),
-                  ),
-                ),
-              if (audioState.currentBand != null &&
-                  (showRemix || audioState.isPlaying))
-                Positioned(
-                  bottom: isNarrow ? 20 : 10,
-                  right: isNarrow ? 20 : 40,
-                  left: isNarrow ? 20 : null,
-                  child: isNarrow
-                      ? Padding(
-                          padding: const EdgeInsets.all(kSpacing12),
-                          child: Row(
-                            spacing: kSpacing8,
-                            children: [
-                              Expanded(
-                                child: GlobalPlayingIndicator(size: size),
-                              ),
-                              ScrollToTopButton(
-                                onTap: () =>
-                                    _scrollToSection(PortfolioSection.profile),
-                              ),
-                            ],
-                          ),
-                        )
-                      : Column(
-                          spacing: kSpacing12,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            if (!isNarrow || audioState.currentBand == null)
-                              Padding(
-                                padding: const EdgeInsets.only(right: 12),
-                                child: ScrollToTopButton(
-                                  onTap: () => _scrollToSection(
-                                    PortfolioSection.profile,
-                                  ),
-                                ),
-                              ),
-                            GlobalPlayingIndicator(size: size),
-                          ],
-                        ),
-                ),
-            ],
+        // Fixed positioned elements
+        if (!isNarrow && showRemix == false)
+          Positioned(
+            right: 46.0,
+            bottom: 36.0,
+            child: ScrollToTopButton(
+              onTap: () => _scrollToSection(PortfolioSection.profile),
+            ),
           ),
-        ),
+
+        // Audio player indicator
+        if (audioState.currentBand != null &&
+            (showRemix || audioState.isPlaying))
+          Positioned(
+            bottom: isNarrow ? 20 : 10,
+            right: isNarrow ? 20 : 40,
+            left: isNarrow ? 20 : null,
+            child: isNarrow
+                ? Row(
+                    spacing: kSpacing8,
+                    children: [
+                      Expanded(child: GlobalPlayingIndicator(size: size)),
+                      ScrollToTopButton(
+                        onTap: () => _scrollToSection(PortfolioSection.profile),
+                      ),
+                    ],
+                  )
+                : Column(
+                    spacing: kSpacing12,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (!isNarrow || audioState.currentBand == null)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: ScrollToTopButton(
+                            onTap: () =>
+                                _scrollToSection(PortfolioSection.profile),
+                          ),
+                        ),
+                      GlobalPlayingIndicator(size: size),
+                    ],
+                  ),
+          ),
       ],
     );
   }

@@ -4,6 +4,7 @@ import 'package:paz1dv/config/config.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
 import 'package:paz1dv/features/education/domain/models/education_model.dart';
 import 'package:paz1dv/features/education/widgets/education_card.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class GridLayout extends StatelessWidget {
   const GridLayout({
@@ -141,24 +142,26 @@ class TopCarousel extends StatelessWidget {
       offset: const Offset(-40, 0),
       child: SizedBox(
         height: size.height * 0.15,
-        child: PageView.builder(
-          controller: controller,
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            final skill = skills[index % skills.length];
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kSpacing8),
-              child: EducationCard(
-                provider: skill.provider,
-                size: size,
-                title: skill.title,
-                description: skill.description,
-                imagePath: skill.imagePath,
+        child: skills.isEmpty
+            ? _CarouselSkeletonRow(size: size)
+            : PageView.builder(
+                controller: controller,
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final skill = skills[index % skills.length];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: kSpacing8),
+                    child: EducationCard(
+                      provider: skill.provider,
+                      size: size,
+                      title: skill.title,
+                      description: skill.description,
+                      imagePath: skill.imagePath,
+                    ),
+                  );
+                },
               ),
-            );
-          },
-        ),
       ),
     );
   }
@@ -182,23 +185,76 @@ class BottomCarousel extends StatelessWidget {
       offset: const Offset(40, 0),
       child: SizedBox(
         height: size.height * 0.15,
-        child: PageView.builder(
-          controller: controller,
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (context, index) {
-            final skill = skills[index % skills.length];
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kSpacing8),
-              child: EducationCard(
-                size: size,
-                title: skill.title,
-                description: skill.description,
-                imagePath: skill.imagePath,
-                provider: skill.provider,
+        child: skills.isEmpty
+            ? _CarouselSkeletonRow(size: size)
+            : PageView.builder(
+                controller: controller,
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final skill = skills[index % skills.length];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: kSpacing8),
+                    child: EducationCard(
+                      size: size,
+                      title: skill.title,
+                      description: skill.description,
+                      imagePath: skill.imagePath,
+                      provider: skill.provider,
+                    ),
+                  );
+                },
               ),
-            );
-          },
+      ),
+    );
+  }
+}
+
+class _CarouselSkeletonRow extends StatelessWidget {
+  final Size size;
+  const _CarouselSkeletonRow({required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    final boneColor = AppPalette.adaptiveColor(
+      context,
+      light: AppPalette.lightGray,
+      dark: AppPalette.darkCharcoal,
+    );
+
+    return Skeletonizer.zone(
+      effect: ShimmerEffect(
+        baseColor: boneColor,
+        highlightColor: boneColor.withAlpha(128),
+      ),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 3,
+        itemBuilder: (context, index) => Container(
+          width: size.width * 0.7,
+          margin: const EdgeInsets.symmetric(horizontal: kSpacing8),
+          padding: const EdgeInsets.all(kPadding16),
+          decoration: BoxDecoration(
+            color: AppPalette.lightGray.withAlpha(30),
+            borderRadius: BorderRadius.circular(kRadius12),
+          ),
+          child: Row(
+            spacing: kSpacing12,
+            children: [
+              Bone.circle(size: size.width * 0.08),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: kSpacing8,
+                  children: [
+                    Bone.text(width: size.width * 0.3),
+                    Bone.multiText(lines: 2, width: size.width * 0.25),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

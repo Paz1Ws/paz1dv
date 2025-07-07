@@ -8,6 +8,7 @@ import 'package:paz1dv/features/skills/domain/skill_model.dart';
 import 'package:paz1dv/config/app/app_typography.dart';
 import 'package:paz1dv/config/constants/responsive_constants.dart';
 import 'package:paz1dv/config/constants/layer_constants.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class SkillsScreen extends ConsumerStatefulWidget {
   const SkillsScreen({super.key});
@@ -75,14 +76,13 @@ class _SkillsScreenState extends ConsumerState<SkillsScreen>
 
     return SizedBox(
       width: double.infinity,
-      // Remove fixed height for narrow screens to make it flexible
       height: isNarrow ? null : size.height * 0.4,
       child: skillsAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => _SkillsSkeleton(size: size, isNarrow: isNarrow),
         error: (e, st) => Center(child: Text('Error: $e')),
         data: (skills) {
           if (skills.isEmpty) {
-            return Center(child: Text('No skills found'));
+            return _SkillsSkeleton(size: size, isNarrow: isNarrow);
           }
 
           final iconSize = isNarrow ? size.width * 0.15 : size.width * 0.06;
@@ -92,7 +92,6 @@ class _SkillsScreenState extends ConsumerState<SkillsScreen>
           }
 
           if (isNarrow) {
-            // For narrow screens, use intrinsic height with flexible layout
             return IntrinsicHeight(
               child: Center(
                 child: Wrap(
@@ -344,6 +343,77 @@ class _SkillsScreenState extends ConsumerState<SkillsScreen>
           }
         },
       ),
+    );
+  }
+}
+
+class _SkillsSkeleton extends StatelessWidget {
+  final Size size;
+  final bool isNarrow;
+
+  const _SkillsSkeleton({required this.size, required this.isNarrow});
+
+  @override
+  Widget build(BuildContext context) {
+    final iconSize = isNarrow ? size.width * 0.15 : size.width * 0.06;
+    final boneColor = AppPalette.adaptiveColor(
+      context,
+      light: AppPalette.lightGray,
+      dark: AppPalette.darkCharcoal,
+    );
+
+    return Skeletonizer.zone(
+      effect: ShimmerEffect(
+        baseColor: boneColor,
+        highlightColor: boneColor.withAlpha(128),
+      ),
+      child: isNarrow
+          ? IntrinsicHeight(
+              child: Center(
+                child: Wrap(
+                  spacing: kSpacing20,
+                  runSpacing: kSpacing20,
+                  alignment: WrapAlignment.center,
+                  children: List.generate(6, (index) {
+                    return SizedBox(
+                      width: iconSize,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: kSpacing12,
+                        children: [
+                          Bone.circle(size: iconSize),
+                          Bone.text(width: iconSize * 0.8),
+                        ],
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            )
+          : Center(
+              child: SizedBox(
+                width: size.width,
+                height: size.height * 0.4,
+                child: Wrap(
+                  spacing: kSpacing20,
+                  runSpacing: kSpacing20,
+                  alignment: WrapAlignment.center,
+                  children: List.generate(8, (index) {
+                    return SizedBox(
+                      width: iconSize,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: kSpacing12,
+                        children: [
+                          Bone.circle(size: iconSize),
+                          Bone.text(width: iconSize * 0.8),
+                        ],
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ),
     );
   }
 }
