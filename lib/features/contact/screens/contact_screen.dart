@@ -64,7 +64,10 @@ class _ContactScreenState extends State<ContactScreen>
                   padding: const EdgeInsets.symmetric(horizontal: kSpacing12),
                   child: const ContactForm(),
                 ),
-                SocialMediaButtons(size: size),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+                  child: SocialMediaButtons(size: size),
+                ),
                 Text(
                   localizations.madeBy,
                   style: AppTypography.caption(context),
@@ -84,8 +87,10 @@ class _ContactScreenState extends State<ContactScreen>
                     padding: const EdgeInsets.symmetric(horizontal: kSpacing12),
                     child: const ContactForm(),
                   ),
-                  SocialMediaButtons(size: size),
-
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
+                    child: SocialMediaButtons(size: size),
+                  ),
                   Text(
                     localizations.madeBy,
                     style: AppTypography.caption(context),

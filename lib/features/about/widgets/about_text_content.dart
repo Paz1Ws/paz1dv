@@ -35,49 +35,52 @@ class AboutTextContent extends StatelessWidget {
         children: [
           if (isNarrow) ...[
             animate
-              ? FadeInLeft(
-                  duration: const Duration(milliseconds: 800),
-                  delay: const Duration(milliseconds: 400),
-                  child: SocialMediaSection(size: size),
-                )
-              : SocialMediaSection(size: size),
+                ? FadeInLeft(
+                    duration: const Duration(milliseconds: 800),
+                    delay: const Duration(milliseconds: 400),
+                    child: SocialMediaSection(size: size),
+                  )
+                : SocialMediaSection(size: size),
           ],
-          
+
           // About Passion text with animation
           animate
-            ? FadeIn(
-                duration: const Duration(milliseconds: 800),
-                delay: const Duration(milliseconds: 300),
-                child: AboutPassionText(
+              ? FadeIn(
+                  duration: const Duration(milliseconds: 800),
+                  delay: const Duration(milliseconds: 300),
+                  child: AboutPassionText(
+                    size: size,
+                    isNarrow: isNarrow,
+                    aboutPassion: aboutPassion,
+                  ),
+                )
+              : AboutPassionText(
                   size: size,
                   isNarrow: isNarrow,
                   aboutPassion: aboutPassion,
                 ),
-              )
-            : AboutPassionText(
-                size: size,
-                isNarrow: isNarrow,
-                aboutPassion: aboutPassion,
-              ),
 
           // About Details text with animation
           animate
-            ? FadeIn(
-                duration: const Duration(milliseconds: 800),
-                delay: const Duration(milliseconds: 600),
-                child: AboutDetailsText(size: size, aboutDetails: aboutDetails),
-              )
-            : AboutDetailsText(size: size, aboutDetails: aboutDetails),
-          
+              ? FadeIn(
+                  duration: const Duration(milliseconds: 800),
+                  delay: const Duration(milliseconds: 600),
+                  child: AboutDetailsText(
+                    size: size,
+                    aboutDetails: aboutDetails,
+                  ),
+                )
+              : AboutDetailsText(size: size, aboutDetails: aboutDetails),
+
           if (!isNarrow) ...[
             SizedBox(height: size.height * 0.01),
             animate
-              ? FadeInUp(
-                  duration: const Duration(milliseconds: 800),
-                  delay: const Duration(milliseconds: 800),
-                  child: SocialMediaSection(size: size),
-                )
-              : SocialMediaSection(size: size),
+                ? FadeInUp(
+                    duration: const Duration(milliseconds: 800),
+                    delay: const Duration(milliseconds: 800),
+                    child: SocialMediaSection(size: size),
+                  )
+                : SocialMediaSection(size: size),
           ],
         ],
       ),
@@ -173,25 +176,25 @@ class SocialMediaButtons extends StatelessWidget {
           SocialMediaButton(
             iconData: AppIcons.instagram,
             label: 'Instagram',
-            color: AppPalette.crimsonRed, // Usar color de la paleta
+            color: AppPalette.rosePink,
             onTap: UrlLauncherUtil.launchInstagram,
           ),
           SocialMediaButton(
             iconData: AppIcons.figma,
             label: 'Figma',
-            color: AppPalette.neonLime, // Usar color de la paleta
+            color: AppPalette.neonLime,
             onTap: UrlLauncherUtil.launchFigma,
           ),
           SocialMediaButton(
             iconData: AppIcons.github,
             label: 'GitHub',
-            color: AppPalette.charcoalGray, // Usar color de la paleta
+            color: AppPalette.charcoalGray,
             onTap: UrlLauncherUtil.launchGitHub,
           ),
           SocialMediaButton(
             iconData: AppIcons.linkedin,
             label: 'LinkedIn',
-            color: AppPalette.vibrantBlue, // Usar color de la paleta
+            color: AppPalette.vibrantBlue,
             onTap: UrlLauncherUtil.launchLinkedIn,
           ),
         ],

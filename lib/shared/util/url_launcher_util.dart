@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class UrlLauncherUtil {
   // Social media URLs
   static const String githubUrl = 'https://github.com/Paz1Ws';
-  static const String instagramUrl = 'https://www.instagram.com/paz1_dv/';
+  static const String instagramUrl =
+      'https://www.instagram.com/studio.byflutterize/';
   static const String linkedinUrl =
       'https://www.linkedin.com/in/christopher-paz-leon-745760202';
   static const String figmaUrl =

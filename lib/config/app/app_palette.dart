@@ -32,6 +32,7 @@ class AppPalette {
 
   // Status Colors
   static const Color crimsonRed = Color(0xFFB00020); // Error red
+  static const Color rosePink = Color(0xFFFF4F7A); // Rose pink
   static const Color forestGreen = Color(0xFF4CAF50); // Success green
   static const Color goldenYellow = Color(0xFFFFC107); // Warning yellow
 
