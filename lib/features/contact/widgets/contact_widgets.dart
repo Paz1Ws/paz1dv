@@ -81,7 +81,7 @@ class _ContactFormState extends ConsumerState<ContactForm> {
           '''${localizations.selectedBenefit}: $selectedBenefitText \n${_messageController.text} ''';
 
       await UrlLauncherUtil.launchEmail(
-        email: '.rewardmnx@gmail.com',
+        email: 'flutterize1@gmail.com',
         subject: _subjectController.text.isEmpty
             ? 'Contacto desde Portfolio'
             : _subjectController.text,
