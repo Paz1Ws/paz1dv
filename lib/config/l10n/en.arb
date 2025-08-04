@@ -323,13 +323,31 @@
         "description": "Authorship credit and year"
     },
     "experienceIndustry": "Industry",
-    "@experienceIndustry": { "description": "Label for industry in experience detail" },
+    "@experienceIndustry": {
+        "description": "Label for industry in experience detail"
+    },
     "experienceClient": "Client",
-    "@experienceClient": { "description": "Label for client in experience detail" },
+    "@experienceClient": {
+        "description": "Label for client in experience detail"
+    },
     "experienceService": "Service",
-    "@experienceService": { "description": "Label for service in experience detail" },
+    "@experienceService": {
+        "description": "Label for service in experience detail"
+    },
     "experienceDate": "Date",
-    "@experienceDate": { "description": "Label for date in experience detail" },
+    "@experienceDate": {
+        "description": "Label for date in experience detail"
+    },
     "imageNotAvailable": "Image not available",
-    "@imageNotAvailable": { "description": "Fallback text for unavailable images" }
+    "@imageNotAvailable": {
+        "description": "Fallback text for unavailable images"
+    },
+    "personalBrand": "Personal Brand",
+    "@personalBrand": {
+        "description": "Label for personal brand"
+    },
+    "availableOn": "Available on",
+    "@availableOn": {
+        "description": "Label to indicate availability on platforms or places"
+    }
 }

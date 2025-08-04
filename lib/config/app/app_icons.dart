@@ -10,6 +10,8 @@ class AppIcons {
   static const IconData up = HugeIcons.strokeRoundedArrowUpDouble;
   // Social media icons
   static const IconData instagram = HugeIcons.strokeRoundedInstagram;
+  static const IconData youtube = HugeIcons.strokeRoundedYoutube;
+
   static const IconData figma = HugeIcons.strokeRoundedFigma;
   static const IconData github = HugeIcons.strokeRoundedGithub;
   static const IconData linkedin = HugeIcons.strokeRoundedLinkedin01;

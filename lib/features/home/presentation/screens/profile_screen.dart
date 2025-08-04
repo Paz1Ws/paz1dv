@@ -90,13 +90,13 @@ class _ProfileSkeleton extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
+                    spacing: kSpacing4,
                     children: [
                       Bone.circle(
                         size: isNarrow
                             ? size.height * 0.05
                             : size.height * 0.06,
                       ),
-                      const SizedBox(width: kSpacing4),
                       Bone.circle(
                         size: isNarrow
                             ? size.height * 0.05

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppPalette {
   // Theme Mode Colors
   static const Color lightMode = Color(0xFFF0F0F0); // Replaces white
-  static const Color darkMode = Color(0xFF121212); // Replaces black
+  static const Color darkMode = Color(0xFF000001); // Replaces black
 
   // Primary Brand Colors
   static const Color neonLime = Color(

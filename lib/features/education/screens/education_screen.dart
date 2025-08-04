@@ -32,43 +32,6 @@ class _EducationScreenState extends ConsumerState<EducationScreen> {
       viewportFraction: 0.8,
       initialPage: 1000,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted && ResponsiveConstants.isNarrowScreen(context)) {
-        _startSynchronizedAutoScroll();
-      }
-    });
-  }
-
-  void _startSynchronizedAutoScroll() {
-    _syncTimer = Timer.periodic(const Duration(milliseconds: 1800), (timer) {
-      if (!mounted) return;
-
-      final currentTopPage = ref.read(topCarouselPageProvider);
-      final currentBottomPage = ref.read(bottomCarouselPageProvider);
-
-      final nextTopPage = currentTopPage + 1;
-      final nextBottomPage = currentBottomPage - 1;
-
-      ref.read(topCarouselPageProvider.notifier).state = nextTopPage;
-      ref.read(bottomCarouselPageProvider.notifier).state = nextBottomPage;
-
-      // Only animate if controller is attached to a PageView
-      if (_topController.hasClients) {
-        _topController.animateToPage(
-          nextTopPage,
-          duration: const Duration(milliseconds: 1500),
-          curve: Curves.easeInOutCubic,
-        );
-      }
-      if (_bottomController.hasClients) {
-        _bottomController.animateToPage(
-          nextBottomPage,
-          duration: const Duration(milliseconds: 1500),
-          curve: Curves.easeInOutCubic,
-        );
-      }
-    });
   }
 
   @override
@@ -85,8 +48,6 @@ class _EducationScreenState extends ConsumerState<EducationScreen> {
     final isNarrow = ResponsiveConstants.isNarrowScreen(context);
     final localizations = AppLocalizations.of(context)!;
     final locale = Localizations.localeOf(context).languageCode;
-
-    // Use the provider to fetch education data
     final educationAsync = ref.watch(educationProvider(locale));
 
     return Container(
@@ -203,7 +164,8 @@ class _EducationSkeleton extends StatelessWidget {
                 childAspectRatio: 3.0,
               ),
               itemCount: 4,
-              itemBuilder: (context, index) => _EducationCardSkeleton(size: size),
+              itemBuilder: (context, index) =>
+                  _EducationCardSkeleton(size: size),
             ),
           Row(
             children: [
@@ -213,10 +175,7 @@ class _EducationSkeleton extends StatelessWidget {
                 flex: 6,
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Bone.multiText(
-                    lines: 3,
-                    width: size.width * 0.4,
-                  ),
+                  child: Bone.multiText(lines: 3, width: size.width * 0.4),
                 ),
               ),
             ],

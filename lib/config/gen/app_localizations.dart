@@ -589,6 +589,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Image not available'**
   String get imageNotAvailable;
+
+  /// Label for personal brand
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Brand'**
+  String get personalBrand;
+
+  /// Label to indicate availability on platforms or places
+  ///
+  /// In en, this message translates to:
+  /// **'Available on'**
+  String get availableOn;
 }
 
 class _AppLocalizationsDelegate

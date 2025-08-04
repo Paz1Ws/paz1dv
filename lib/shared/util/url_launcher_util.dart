@@ -10,6 +10,7 @@ class UrlLauncherUtil {
       'https://www.linkedin.com/in/christopher-paz-leon-745760202';
   static const String figmaUrl =
       'https://www.figma.com/team_invite/redeem/rGBa861pNEXetRMq1oPNE1';
+  static const String youtubeUrl = 'https://www.youtube.com/@Flutterize1';
 
   /// Launch URL with error handling
   static Future<void> launchURL(String url) async {
@@ -43,6 +44,11 @@ class UrlLauncherUtil {
   /// Launch Figma team invite
   static Future<void> launchFigma() async {
     await launchURL(figmaUrl);
+  }
+
+  /// Launch YouTube channel
+  static Future<void> launchYoutube() async {
+    await launchURL(youtubeUrl);
   }
 
   /// Launch email with subject and body using mailto

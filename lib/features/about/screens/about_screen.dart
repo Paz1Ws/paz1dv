@@ -9,7 +9,6 @@ import 'package:paz1dv/features/about/widgets/profile_image_card.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:paz1dv/features/about/domain/profile_model.dart';
 
-// State provider to track if the animation has been played
 final aboutAnimationPlayedProvider = StateProvider<bool>((ref) => false);
 
 class AboutScreen extends ConsumerWidget {
@@ -48,7 +47,6 @@ class _AboutContentState extends ConsumerState<_AboutContent> {
   @override
   void initState() {
     super.initState();
-    // Schedule a check after the first frame is rendered
     WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
@@ -97,7 +95,6 @@ class DesktopLayout extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Center(
-              // Apply FadeInLeft animation to ProfileImageCard
               child: animate
                   ? FadeInLeft(
                       duration: const Duration(milliseconds: 800),
@@ -108,7 +105,6 @@ class DesktopLayout extends StatelessWidget {
           ),
           Expanded(
             flex: 3,
-            // Apply FadeInRight animation to AboutTextContent
             child: animate
                 ? FadeInRight(
                     duration: const Duration(milliseconds: 800),

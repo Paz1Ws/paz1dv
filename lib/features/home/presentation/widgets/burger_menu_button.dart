@@ -191,33 +191,31 @@ class _BurgerMenuOverlay extends ConsumerWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).pop(),
       child: Scaffold(
-        backgroundColor: AppPalette.darkMode.withOpacity(0.95),
+        backgroundColor: AppPalette.darkMode.withAlpha((0.95 * 255).toInt()),
         body: Center(
           child: GestureDetector(
-            onTap: () {}, // Prevents taps on the menu from closing the dialog.
+            onTap: () {},
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              spacing: kSpacing30,
               children: [
                 _MenuItem(
                   label: localizations.aboutLabel,
                   onTap: () => onMenuItemTap(PortfolioSection.about),
                 ),
-                const SizedBox(height: kSpacing30),
-                _MenuItem(
-                  label: localizations.educationLabel,
-                  onTap: () => onMenuItemTap(PortfolioSection.education),
-                ),
-                const SizedBox(height: kSpacing30),
+
                 _MenuItem(
                   label: localizations.experienceLabel,
                   onTap: () => onMenuItemTap(PortfolioSection.experience),
                 ),
-                const SizedBox(height: kSpacing30),
+                _MenuItem(
+                  label: localizations.educationLabel,
+                  onTap: () => onMenuItemTap(PortfolioSection.education),
+                ),
                 _MenuItem(
                   label: localizations.skillsLabel,
                   onTap: () => onMenuItemTap(PortfolioSection.skills),
                 ),
-                const SizedBox(height: kSpacing30),
                 _MenuItem(
                   label: localizations.contactLabel,
                   onTap: () => onMenuItemTap(PortfolioSection.contact),

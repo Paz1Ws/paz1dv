@@ -10,7 +10,6 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(const ProviderScope(child: MainApp()));
 }
 

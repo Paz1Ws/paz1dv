@@ -10,7 +10,6 @@ final selectedExperienceProvider = StateProvider<ExperienceModel?>(
   (ref) => null,
 );
 
-// Provider to track if the experience section animation has been played
 final experienceAnimationPlayedProvider = StateProvider<bool>((ref) => false);
 
 class ExperienceScreen extends ConsumerStatefulWidget {
@@ -22,7 +21,7 @@ class ExperienceScreen extends ConsumerStatefulWidget {
 
 class _ExperienceScreenState extends ConsumerState<ExperienceScreen> {
   final _experienceSectionKey = GlobalKey();
-  bool _hasAnimated = false;
+  final bool _hasAnimated = false;
 
   @override
   void initState() {

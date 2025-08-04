@@ -94,6 +94,7 @@ class _ContactScreenState extends State<ContactScreen>
                   Text(
                     localizations.madeBy,
                     style: AppTypography.caption(context),
+                    textAlign: TextAlign.center,
                   ),
                   SizedBox(height: size.height * 0.01),
                 ],

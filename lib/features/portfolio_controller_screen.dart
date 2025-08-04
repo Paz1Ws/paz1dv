@@ -63,20 +63,6 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
         ),
       ),
 
-      // 2: Education section
-      Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: isNarrow ? size.width * 0.05 : size.width * 0.08,
-        ),
-        child: Column(
-          children: [
-            SectionDivider(title: localizations.educationLabel),
-            const EducationScreen(),
-          ],
-        ),
-      ),
-
-      // 3: Experience section
       Padding(
         padding: EdgeInsets.symmetric(
           horizontal: isNarrow ? size.width * 0.05 : size.width * 0.08,
@@ -88,7 +74,17 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
           ],
         ),
       ),
-
+      Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: isNarrow ? size.width * 0.05 : size.width * 0.08,
+        ),
+        child: Column(
+          children: [
+            SectionDivider(title: localizations.educationLabel),
+            const EducationScreen(),
+          ],
+        ),
+      ),
       // 4: Skills section
       Padding(
         padding: EdgeInsets.symmetric(
@@ -172,7 +168,6 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
           ),
         ),
 
-        // Fixed positioned elements
         if (!isNarrow && showRemix == false)
           Positioned(
             right: 46.0,
@@ -182,7 +177,6 @@ class _PortfolioHomeScreenState extends ConsumerState<PortfolioHomeScreen> {
             ),
           ),
 
-        // Audio player indicator
         if (audioState.currentBand != null &&
             (showRemix || audioState.isPlaying))
           Positioned(

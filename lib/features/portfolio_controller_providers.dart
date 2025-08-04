@@ -11,8 +11,8 @@ final scrollToIndexProvider = StateProvider<int?>((ref) => null);
 const Map<PortfolioSection, int> sectionToIndexMap = {
   PortfolioSection.profile: 0,
   PortfolioSection.about: 1,
-  PortfolioSection.education: 2,
-  PortfolioSection.experience: 3,
+  PortfolioSection.experience: 2,
+  PortfolioSection.education: 3,
   PortfolioSection.skills: 4,
-  PortfolioSection.contact: 6, // 5 es el divider, 6 es el ContactScreen
+  PortfolioSection.contact: 6,
 };

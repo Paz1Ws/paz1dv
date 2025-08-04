@@ -284,4 +284,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get imageNotAvailable => 'Imagen no disponible';
+
+  @override
+  String get personalBrand => 'Marca personal';
+
+  @override
+  String get availableOn => 'Disponible en';
 }

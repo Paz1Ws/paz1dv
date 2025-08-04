@@ -323,13 +323,31 @@
         "description": "Crédito de autoría y año"
     },
     "experienceIndustry": "Industria",
-    "@experienceIndustry": { "description": "Etiqueta para industria en detalle de experiencia" },
+    "@experienceIndustry": {
+        "description": "Etiqueta para industria en detalle de experiencia"
+    },
     "experienceClient": "Cliente",
-    "@experienceClient": { "description": "Etiqueta para cliente en detalle de experiencia" },
+    "@experienceClient": {
+        "description": "Etiqueta para cliente en detalle de experiencia"
+    },
     "experienceService": "Servicio",
-    "@experienceService": { "description": "Etiqueta para servicio en detalle de experiencia" },
+    "@experienceService": {
+        "description": "Etiqueta para servicio en detalle de experiencia"
+    },
     "experienceDate": "Fecha",
-    "@experienceDate": { "description": "Etiqueta para fecha en detalle de experiencia" },
+    "@experienceDate": {
+        "description": "Etiqueta para fecha en detalle de experiencia"
+    },
     "imageNotAvailable": "Imagen no disponible",
-    "@imageNotAvailable": { "description": "Texto alternativo para imagen no disponible" }
+    "@imageNotAvailable": {
+        "description": "Texto alternativo para imagen no disponible"
+    },
+    "personalBrand": "Marca personal",
+    "@personalBrand": {
+        "description": "Etiqueta para marca personal"
+    },
+    "availableOn": "Disponible en",
+    "@availableOn": {
+        "description": "Etiqueta para indicar disponibilidad en plataformas o lugares"
+    }
 }

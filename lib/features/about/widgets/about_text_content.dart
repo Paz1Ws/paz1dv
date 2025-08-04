@@ -26,24 +26,14 @@ class AboutTextContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Container(
       padding: EdgeInsets.all(isNarrow ? size.width * 0.05 : size.width * 0.03),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: size.height * 0.024,
+        spacing: size.height * 0.02,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (isNarrow) ...[
-            animate
-                ? FadeInLeft(
-                    duration: const Duration(milliseconds: 800),
-                    delay: const Duration(milliseconds: 400),
-                    child: SocialMediaSection(size: size),
-                  )
-                : SocialMediaSection(size: size),
-          ],
-
-          // About Passion text with animation
           animate
               ? FadeIn(
                   duration: const Duration(milliseconds: 800),
@@ -59,29 +49,35 @@ class AboutTextContent extends StatelessWidget {
                   isNarrow: isNarrow,
                   aboutPassion: aboutPassion,
                 ),
-
-          // About Details text with animation
-          animate
-              ? FadeIn(
-                  duration: const Duration(milliseconds: 800),
-                  delay: const Duration(milliseconds: 600),
-                  child: AboutDetailsText(
-                    size: size,
-                    aboutDetails: aboutDetails,
+          Text(
+            localizations.personalBrand,
+            style: AppTypography.subtitleLarge(
+              context,
+              color: AppPalette.primaryColor(context),
+            ),
+          ),
+          Column(
+            children: [
+              GestureDetector(
+                onTap: UrlLauncherUtil.launchYoutube,
+                child: _FlutterizeImageWithHover(size: size),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    localizations.availableOn,
+                    style: AppTypography.subtitleLarge(
+                      context,
+                      color: AppPalette.primaryColor(context),
+                    ),
                   ),
-                )
-              : AboutDetailsText(size: size, aboutDetails: aboutDetails),
-
-          if (!isNarrow) ...[
-            SizedBox(height: size.height * 0.01),
-            animate
-                ? FadeInUp(
-                    duration: const Duration(milliseconds: 800),
-                    delay: const Duration(milliseconds: 800),
-                    child: SocialMediaSection(size: size),
-                  )
-                : SocialMediaSection(size: size),
-          ],
+                  Spacer(),
+                  FlutterizeSocialMedia(size: size),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -113,50 +109,6 @@ class AboutPassionText extends StatelessWidget {
               context,
               color: AppPalette.reverseAdaptiveColor(context),
             ).copyWith(fontWeight: FontWeight.w400, height: 1.5),
-    );
-  }
-}
-
-class AboutDetailsText extends StatelessWidget {
-  final Size size;
-  final String aboutDetails;
-
-  const AboutDetailsText({
-    super.key,
-    required this.size,
-    required this.aboutDetails,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      aboutDetails,
-      style: AppTypography.bodyLarge(context, color: AppPalette.charcoalGray),
-    );
-  }
-}
-
-class SocialMediaSection extends StatelessWidget {
-  final Size size;
-
-  const SocialMediaSection({super.key, required this.size});
-
-  @override
-  Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-    return Column(
-      spacing: size.height * 0.02,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          localizations.connectWithMe,
-          style: AppTypography.subtitleLarge(
-            context,
-            color: AppPalette.primaryColor(context),
-          ),
-        ),
-        SocialMediaButtons(size: size),
-      ],
     );
   }
 }
@@ -196,6 +148,39 @@ class SocialMediaButtons extends StatelessWidget {
             label: 'LinkedIn',
             color: AppPalette.vibrantBlue,
             onTap: UrlLauncherUtil.launchLinkedIn,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FlutterizeSocialMedia extends StatelessWidget {
+  final Size size;
+
+  const FlutterizeSocialMedia({super.key, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    final isNarrow = ResponsiveConstants.isNarrowScreen(context);
+
+    return FittedBox(
+      child: Wrap(
+        spacing: isNarrow ? size.width * 0.02 : size.width * 0.02,
+        runSpacing: isNarrow ? size.height * 0.005 : size.height * 0.010,
+        children: [
+          SocialMediaButton(
+            iconData: AppIcons.instagram,
+            label: 'Instagram',
+            color: AppPalette.rosePink,
+            onTap: UrlLauncherUtil.launchInstagram,
+          ),
+          SizedBox(width: isNarrow ? kSpacing4 : kSpacing12),
+          SocialMediaButton(
+            iconData: AppIcons.youtube,
+            label: 'YouTube',
+            color: AppPalette.crimsonRed,
+            onTap: UrlLauncherUtil.launchYoutube,
           ),
         ],
       ),
@@ -275,8 +260,12 @@ class _SocialMediaButtonState extends State<SocialMediaButton>
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.02,
-                    vertical: size.height * 0.016,
+                    horizontal: isNarrow
+                        ? size.width * 0.05
+                        : size.width * 0.02,
+                    vertical: isNarrow
+                        ? size.height * 0.01
+                        : size.height * 0.016,
                   ),
                   decoration: BoxDecoration(
                     color: _isHovered
@@ -311,7 +300,7 @@ class _SocialMediaButtonState extends State<SocialMediaButton>
                         color: _isHovered
                             ? widget.color
                             : AppPalette.reverseAdaptiveColor(context),
-                        size: isNarrow ? size.width * 1.1 : size.width * 0.025,
+                        size: isNarrow ? size.width * 0.05 : size.width * 0.025,
                       ),
                       if (!isNarrow) ...[
                         SizedBox(width: size.width * 0.008),
@@ -333,6 +322,65 @@ class _SocialMediaButtonState extends State<SocialMediaButton>
           );
         },
       ),
+    );
+  }
+}
+
+class _FlutterizeImageWithHover extends StatefulWidget {
+  final Size size;
+
+  const _FlutterizeImageWithHover({required this.size});
+
+  @override
+  State<_FlutterizeImageWithHover> createState() =>
+      _FlutterizeImageWithHoverState();
+}
+
+class _FlutterizeImageWithHoverState extends State<_FlutterizeImageWithHover> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
+      child: _isHovered
+          ? Swing(
+              duration: const Duration(milliseconds: 600),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 400),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: ScaleTransition(scale: animation, child: child),
+                  );
+                },
+                child: Image.asset(
+                  'assets/images/UX.png',
+                  width: widget.size.width * 0.2,
+                  height: widget.size.width * 0.2,
+                  filterQuality: FilterQuality.high,
+                ),
+              ),
+            )
+          : Tada(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 400),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: ScaleTransition(scale: animation, child: child),
+                  );
+                },
+                child: Image.asset(
+                  'assets/images/flutterize_transparent.jpeg',
+                  width: widget.size.width * 0.2,
+                  height: widget.size.width * 0.2,
+                  filterQuality: FilterQuality.high,
+                ),
+              ),
+            ),
     );
   }
 }
