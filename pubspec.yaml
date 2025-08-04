@@ -8,8 +8,8 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter
-  google_fonts: ^6.2.1
+    sdk: flutter 
+  google_fonts: ^6.3.0
   riverpod: ^2.6.1
   flutter_riverpod: ^2.6.1
   dio: ^5.8.0+1
